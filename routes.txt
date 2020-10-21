@@ -1,36 +1,38 @@
-post /api/myrecette :
-    creation de nouvelles recettes
-    erreur 400 si on a deja une recette qui a le meme titre
-    parametres dans body : tous les champs de la recette, sauf id user et rid
+user enregistre dans req.session.user
 
-get /api/signup :
+get /api/signup : Constance
     connection d'un utilisateur
     parametres dans body : nom de l'utilisateur + password hashe
 
-post /api/signin :
+post /api/signin : Constance
     creation d'un utilisateur
     parametres dans body : tous les champs sauf userId de la table user
 
-get /api/recette
-    retourne une recette avec un rid donne en parametre
+get /api/recettes : Moise
+    retourne l'ensemble des recettes du site
+    parametres dans body : rien
+
+get /api/recette : Kenza
+    retourne une recette avec un rid
     parametres dans body : le rid
 
-get /api/myrecettes
+get /api/myrecettes : Constance
     retourne toutes les recettes creees par l'utilisateur connecte
     erreur si non enregistre
     parametres dans body : le userId
 
-put /api/recette
+put /api/recette : Kenza
     modification d'une recette avec un rid donne en parametre
     erreur si l'userid de l'utilisateur connecte n'est pas le meme que celui qui figure dans la recette
     parametres dans body : tout le corps de la recette
 
-post /api/recette
+put /api/review : Moise
+    rajoute une review donnee en parametre
+    erreur si pas de user connecte
+    parametres dans body : la nouvelle review
+
+post /api/recette : Kenza
     creation d'une recette
     erreur si pas de user connecte
     parametres dans body : tout le corps de la recett
 
-put /api/review
-    rajoute une review donnee en parametre
-    erreur si pas de user connecte
-    parametres dans body : la nouvelle review
