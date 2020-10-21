@@ -5,10 +5,10 @@ const bcrypt = require('bcrypt')
 const { Client } = require('pg')
 
 const client = new Client({
-    user: 'postgres',
+    user: 'project_user',
     host: 'localhost',
     password: 'test',
-    database: 'TP5'
+    database: 'projet'
 })
 
 client.connect()
@@ -16,6 +16,8 @@ client.connect()
 router.get('/test', (req, res) => {
     res.json({message : "hello world"})
 })
+
+
 
 
 module.exports = router

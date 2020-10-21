@@ -1,0 +1,36 @@
+post /api/myrecette :
+    creation de nouvelles recettes
+    erreur 400 si on a deja une recette qui a le meme titre
+    parametres dans body : tous les champs de la recette, sauf id user et rid
+
+get /api/signup :
+    connection d'un utilisateur
+    parametres dans body : nom de l'utilisateur + password hashe
+
+post /api/signin :
+    creation d'un utilisateur
+    parametres dans body : tous les champs sauf userId de la table user
+
+get /api/recette
+    retourne une recette avec un rid donne en parametre
+    parametres dans body : le rid
+
+get /api/myrecettes
+    retourne toutes les recettes creees par l'utilisateur connecte
+    erreur si non enregistre
+    parametres dans body : le userId
+
+put /api/recette
+    modification d'une recette avec un rid donne en parametre
+    erreur si l'userid de l'utilisateur connecte n'est pas le meme que celui qui figure dans la recette
+    parametres dans body : tout le corps de la recette
+
+post /api/recette
+    creation d'une recette
+    erreur si pas de user connecte
+    parametres dans body : tout le corps de la recett
+
+put /api/review
+    rajoute une review donnee en parametre
+    erreur si pas de user connecte
+    parametres dans body : la nouvelle review
