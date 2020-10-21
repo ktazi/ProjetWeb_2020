@@ -76,8 +76,78 @@ router.put('/recette', async (req, res) => {
         text : "SELECT * FROM recette WHERE rid=$1",
             values : [input.rid]
     })
+    if (exists.rows.length < 1){
+        res.json(null)
+        return
+    }
+    let sql ="UPDATE recette SET picture = $1 WHERE rid=$2"
+    await client.query({
+        text :sql,
+        values : [input.picture,input.rid]
+    });
+    sql ="UPDATE recette SET title = $1 WHERE rid=$2"
+    await client.query({
+        text :sql,
+        values : [input.title,input.rid]
+    });
+    await client.query({
+            text : "UPDATE recette SET steps = '{}' WHERE rid=$1",
+            values : [input.rid]
+        }
+    )
+    let sql2 = "UPDATE recette SET steps = array_append(steps, $1) WHERE rid=$2;"
+    for (let i = 0; i < input.steps.length; i++)
+    {
+        await client.query({
+            text :sql2,
+            values : [input.steps[i],input.rid]
+        });
+    }
+    await client.query({
+            text : "UPDATE recette SET mat = '{}' WHERE rid=$1",
+            values : [input.rid]
+        }
+    )
+    let sql3 = "UPDATE recette SET mat = array_append(mat, $1) WHERE rid=$2;"
+    for (let i = 0; i < input.mat.length; i++)
+    {
+        await client.query({
+            text :sql3,
+            values : [input.mat[i],input.rid]
+        });
+    }
+    await client.query({
+            text : "UPDATE recette SET ing = '{}' WHERE rid=$1",
+            values : [input.rid]
+        }
+    )
+    let sql4 = "UPDATE recette SET ing = array_append(ing, $1) WHERE rid=$2;"
+    for (let i = 0; i < input.ing.length; i++)
+    {
+        await client.query({
+            text :sql4,
+            values : [input.ing[i],input.rid]
+        });
+    }
 
-    res.json({message : "TODO"})
+    await client.query({
+            text : "UPDATE recette SET tag = '{}' WHERE rid=$1",
+            values : [input.rid]
+        }
+    )
+    let sql5 = "UPDATE recette SET tag = array_append(tag, $1) WHERE rid=$2;"
+    for (let i = 0; i < input.tag.length; i++)
+    {
+        await client.query({
+            text :sql5,
+            values : [input.tag[i],input.rid]
+        });
+    }
+    let result = await client.query({
+        text :"SELECT * FROM recette WHERE rid=$1",
+        values : [input.rid]
+    });
+    res.json(result.rows)
 })
 
 /**
