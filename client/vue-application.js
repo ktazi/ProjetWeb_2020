@@ -1,7 +1,7 @@
 const Creation = window.httpVueLoader('./Components/Creation.vue')
 
 const routes = [
-    {path: '/recette-creation', component:Creation}
+    {path: '/recette-update', component:Creation}
 ]
 
 const router = new VueRouter({
