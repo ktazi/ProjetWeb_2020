@@ -43,7 +43,7 @@ router.post('/signin', (req, res) => {
 
 router.get('/recettes', async (req, res) => {
     let sql = 'SELECT * FROM recette'
-    result = await client.query({
+    let result = await client.query({
         text: sql
     })
     res.json(result.rows)
