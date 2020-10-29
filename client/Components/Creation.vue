@@ -26,14 +26,14 @@
             </div>
           </div>
         </div>
-      <div class="row justify-content-center border-bottom pt-2 " >
+      <div class="row justify-content-center pt-2 text-light pt-3 pb-3" style="background:linear-gradient(90deg, rgba(66,72,116,1) 0%, rgba(166,177,225,1) 79%, rgba(220,214,247,1) 100%) ">
         <h2>Tags : </h2>
         <div v-if="display_tag" class="row justify-content-center pt-2 ">
           <ul class="" v-for="tag in recipe.tag" style="list-style: none">
             <li class="">{{tag}}</li>
           </ul>
           <button @click="tag" class="btn">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="white" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
             </svg>
           </button>
@@ -48,12 +48,12 @@
         </div>
       </div>
         <div class="row">
-          <div class="col-3 text-center border-right bg-light pt-5 pb-5" >
-            <div class="mb-5">
+          <div class="col-3 text-center border-right pt-5 pb-5 bg-light" >
+            <div class="mb-5" style="color:#424874">
               <h3 class="mb-5">Ingrédients</h3>
               <div v-if="display_ing">
                 <ul class="list-group list-group-flush " v-for="ing in recipe.ing">
-                  <li class="mb list-group-item bg-light">
+                  <li class="mb list-group-item bg-light" >
                     <p class="lead">{{ing}}</p>
                   </li>
                 </ul>
@@ -73,8 +73,8 @@
               </div>
 
             </div>
-            <div>
-              <h3 class="mb-5">Materiel</h3>
+            <div style="color:#424874">
+              <h3 class="mb-5" >Materiel</h3>
               <div v-if="display_mat">
                 <ul class="list-group list-group-flush" v-for="mat in recipe.mat">
                   <li class="mb list-group-item bg-light">
@@ -97,7 +97,7 @@
               </div>
             </div>
           </div>
-          <div class="col-9  border-right pt-5 pb-5 pl-5 pr-5" >
+          <div class="col-9  border-right pt-5 pb-5 pl-5 pr-5 text-light" style="background-color: #424874">
             <h1 class="mb-5">Étapes : </h1>
             <div v-if="display_steps">
               <ul v-for="step in recipe.steps">
@@ -106,7 +106,7 @@
                 </li>
               </ul>
               <button @click="steps" class="btn">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="white" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                 </svg>
               </button>
@@ -128,6 +128,7 @@
 </template>
 <script>
 module.exports = {
+  props : ['redirect','creation'],
   data () {
     return {
       display_title : true,
@@ -137,13 +138,16 @@ module.exports = {
       display_tag : true,
       recipe : {
         title : "Sans Titre",
-        picture : "https://static.vecteezy.com/system/resources/previews/001/183/293/non_2x/neutral-low-poly-abstract-banner-vector.jpg",
+        picture : "https://www.wallpaperflare.com/static/363/962/392/minimalism-low-poly-white-gray-wallpaper.jpg",
         mat : ["Listez le matériel ici"],
         ing : ["ingredient 1", "ingredient 2"],
         tag : ["tag 1", "tag 2"],
         steps : ["Listez les étapes de la recette ici."]
       }
     }
+  },
+  mounted :{
+
   },
   methods : {
     update_title(){
@@ -252,10 +256,6 @@ module.exports = {
       this.recipe.tag = tag;
       this.display_tag = display;
     }
-
-
-
-
   }
 
 

@@ -12,7 +12,7 @@ get /api/recettes : Moise
     retourne l'ensemble des recettes du site
     parametres dans body : rien
 
-get /api/recette : Kenza
+get /api/recette : Kenza done
     retourne une recette avec un rid
     parametres dans body : le rid
 
@@ -21,7 +21,7 @@ get /api/myrecettes : Constance
     erreur si non enregistre
     parametres dans body : le userId
 
-put /api/recette : Kenza
+put /api/recette : Kenza done
     modification d'une recette avec un rid donne en parametre
     erreur si l'userid de l'utilisateur connecte n'est pas le meme que celui qui figure dans la recette
     parametres dans body : tout le corps de la recette
@@ -31,7 +31,7 @@ put /api/review : Moise
     erreur si pas de user connecte
     parametres dans body : la nouvelle review
 
-post /api/recette : Kenza
+post /api/recette : Kenza done
     creation d'une recette
     erreur si pas de user connecte
     parametres dans body : tout le corps de la recett
