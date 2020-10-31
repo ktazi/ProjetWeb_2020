@@ -4,7 +4,7 @@
 
 
 <script>
-module.export = {
+module.exports = {
     
 }
 </script>
