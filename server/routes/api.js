@@ -21,6 +21,7 @@ router.get('/test', (req, res) => {
     res.json({message : "hello world"})
 })
 
+
 /**
  * sign up route
  */
@@ -61,7 +62,6 @@ router.get('/recette', async (req, res) => {
         text :sql,
         values : [id]
     });
-    console.log(result.rows[0].note,'ma note') ;
     res.json(result.rows)
 })
 
@@ -72,12 +72,12 @@ router.get('/recette', async (req, res) => {
 router.put('/recette', async (req, res) => {
     let input = {title : req.body.title,
         picture : req.body.picture,
-        userid : req.body.userid,//temporaire
-        steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
-        mat:["mat1", "mat2"],//temporaire
-        ing:["ing1","ing2","ing3"],//temporaire
-        tag:["tag1","tag2"],
-        rid: req.body.rid}//temporaire
+        userid : 0,//temporaire
+        steps : req.body.steps,
+        mat:req.body.mat,
+        ing:req.body.ing,
+        tag:req.body.tag,
+        rid: req.body.rid}
     let exists = await client.query({
         text : "SELECT * FROM recette WHERE rid=$1",
             values : [input.rid]
@@ -163,11 +163,11 @@ router.put('/recette', async (req, res) => {
 router.post('/recette', async (req, res) => {
     let input = {title : req.body.title,
                     picture : req.body.picture,
-                    userid : req.body.userid,//temporaire
-                    steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
-                    mat:["mat1", "mat2"],//temporaire
-                    ing:["ing1","ing2","ing3"],//temporaire
-                    tag:["tag1","tag2"]}//temporaire
+                    userid : 0,//temporaire
+                    steps : req.body.steps,
+                    mat:req.body.mat,
+                    ing:req.body.ing,
+                    tag:req.body.tag}
     let sql = "INSERT INTO recette (title, picture, userid, nb_not, note) VALUES ( $1, $2, $3,0,0) RETURNING*";
     let rid = await client.query({
         text :sql,

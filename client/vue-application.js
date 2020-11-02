@@ -1,9 +1,13 @@
 const Creation = window.httpVueLoader('./Components/Creation.vue')
 const recettes = window.httpVueLoader('./Components/recettes.vue')
+const Home = window.httpVueLoader('./Components/Home.vue')
 const SignIn = window.httpVueLoader('./Components/SignIn.vue')
 const SignUp = window.httpVueLoader('./Components/SignUp.vue')
 
 const routes = [
+    {path: '/recette-create/:rid', component:Creation},
+    {path: '/all-recettes', component:recettes},
+    {path: '/profile', component:Home},
     {path: '/recette-update', component:Creation},
     {path: '/all-recettes', component:recettes},
     {path: '/Sign-in', component:SignIn},
