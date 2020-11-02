@@ -25,18 +25,48 @@ router.get('/test', (req, res) => {
 /**
  * sign up route
  */
-
-router.get('/signup', (req, res) => {
-    res.json({message : "TODO"})
+//Inscription
+router.get('/signin', async(req, res) => {
+    let sql = 'SELECT * FROM public."user"'
+    const users = await client.query({
+        text : sql
+    })
+    res.json(users.rows)
 })
-
 /**
  * sign in route
  */
-
-router.post('/signin', (req, res) => {
+// Connexion
+router.post('/signup', async (req, res) => {
     res.json({message : "TODO"})
+    let sql = 'SELECT * FROM public."user"'
+    const users = await client.query({
+        text : sql
+    })
+
+    const name = req.body.name
+    const met = req.body.met
+    const email = req.body.email
+    const pswd = req.body.pswd
+    const pic = req.body.pic
+
+    if ( email !== '' || pswd !== ''){
+        res.status(400).json({message: "Bad request"})
+    }
+    const user = {
+        id: users.rows.length, // Problème lors de supression d'un identifiant
+        name: name,
+        met: met,
+        email: email,
+        pswd: pswd,
+        pic: pic
+    }
+    const sml = 'INSERT INTO public."user"(id,name,met,email,pswd,pic)VALUES("+user.id+","+user.name+","+user.met+","+user.email+","user.pswd+","+user.pic+") RETURNING *'
+    await client.query({
+        text: sml
+    })
 })
+
 
 /**
  * route that gets all recipes

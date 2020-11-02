@@ -1,3 +1,4 @@
+const Register = window.httpVueLoader('./components/Register.vue')
 const Creation = window.httpVueLoader('./Components/Creation.vue')
 const recettes = window.httpVueLoader('./Components/recettes.vue')
 const Home = window.httpVueLoader('./Components/Home.vue')
@@ -11,7 +12,8 @@ const routes = [
     {path: '/recette-update', component:Creation},
     {path: '/all-recettes', component:recettes},
     {path: '/Sign-in', component:SignIn},
-    {path: '/Sign-up', component:SignUp}
+    {path: '/Sign-up', component:SignUp},
+    { path: '/register', component: Register}
 ]
 
 const router = new VueRouter({
@@ -21,20 +23,13 @@ const router = new VueRouter({
 var app = new Vue({
     router,
     el: '#app',
-    data:{
-        recttes: []
-    },
-    methods: {
+    methods: { // fonction capable de se mouvoir
         async createUser () {
-            const res = await axios.get('/api/signup')
+            const res = await axios.post('/api/signup')
+            console.log(res);
         },
-        async connectUser () {
-            const res = await axios.post('/api/signin')
-        },
-        async getRecettes(){
-            const res = await axios.get('api/recettes')
-            this.recettes = res.data
+        async connectUser (user) {
+            const res = await axios.get('/api/signin', user)
+            console.log(res);
         }
-    }
-
-})
+}})

@@ -20,21 +20,20 @@
 </template>
 
 <script>
-module.exports = {
-  data(){
-    return{
-      user: {
-        email: '',
-        password: ''
+  module.exports = {
+    data(){
+      return{
+        user: {
+          email: '',
+          password: ''
+        }
+      }
+    },
+    methods:{
+      connectUser(){
+        console.log(this.user)
+        this.$emit('connect-user', this.user)
       }
     }
-  },
-  methods:{
-    connectUser(){
-      console.log(this.user)
-      this.$emit('connect-user', this.user)
-    }
   }
-
-}
 </script>
