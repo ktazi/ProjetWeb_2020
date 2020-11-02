@@ -21,21 +21,52 @@ router.get('/test', (req, res) => {
     res.json({message : "hello world"})
 })
 
+
 /**
  * sign up route
  */
-
-router.get('/signup', (req, res) => {
-    res.json({message : "TODO"})
+//Inscription
+router.get('/signin', async(req, res) => {
+    let sql = 'SELECT * FROM public."user"'
+    const users = await client.query({
+        text : sql
+    })
+    res.json(users.rows)
 })
-
 /**
  * sign in route
  */
-
-router.post('/signin', (req, res) => {
+// Connexion
+router.post('/signup', async (req, res) => {
     res.json({message : "TODO"})
+    let sql = 'SELECT * FROM public."user"'
+    const users = await client.query({
+        text : sql
+    })
+
+    const name = req.body.name
+    const met = req.body.met
+    const email = req.body.email
+    const pswd = req.body.pswd
+    const pic = req.body.pic
+
+    if ( email !== '' || pswd !== ''){
+        res.status(400).json({message: "Bad request"})
+    }
+    const user = {
+        id: users.rows.length, // Problème lors de supression d'un identifiant
+        name: name,
+        met: met,
+        email: email,
+        pswd: pswd,
+        pic: pic
+    }
+    const sml = 'INSERT INTO public."user"(id,name,met,email,pswd,pic)VALUES("+user.id+","+user.name+","+user.met+","+user.email+","user.pswd+","+user.pic+") RETURNING *'
+    await client.query({
+        text: sml
+    })
 })
+
 
 /**
  * route that gets all recipes
@@ -61,7 +92,6 @@ router.get('/recette', async (req, res) => {
         text :sql,
         values : [id]
     });
-    console.log(result.rows[0].note,'ma note') ;
     res.json(result.rows)
 })
 
@@ -72,12 +102,12 @@ router.get('/recette', async (req, res) => {
 router.put('/recette', async (req, res) => {
     let input = {title : req.body.title,
         picture : req.body.picture,
-        userid : req.body.userid,//temporaire
-        steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
-        mat:["mat1", "mat2"],//temporaire
-        ing:["ing1","ing2","ing3"],//temporaire
-        tag:["tag1","tag2"],
-        rid: req.body.rid}//temporaire
+        userid : 0,//temporaire
+        steps : req.body.steps,
+        mat:req.body.mat,
+        ing:req.body.ing,
+        tag:req.body.tag,
+        rid: req.body.rid}
     let exists = await client.query({
         text : "SELECT * FROM recette WHERE rid=$1",
             values : [input.rid]
@@ -163,11 +193,11 @@ router.put('/recette', async (req, res) => {
 router.post('/recette', async (req, res) => {
     let input = {title : req.body.title,
                     picture : req.body.picture,
-                    userid : req.body.userid,//temporaire
-                    steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
-                    mat:["mat1", "mat2"],//temporaire
-                    ing:["ing1","ing2","ing3"],//temporaire
-                    tag:["tag1","tag2"]}//temporaire
+                    userid : 0,//temporaire
+                    steps : req.body.steps,
+                    mat:req.body.mat,
+                    ing:req.body.ing,
+                    tag:req.body.tag}
     let sql = "INSERT INTO recette (title, picture, userid, nb_not, note) VALUES ( $1, $2, $3,0,0) RETURNING*";
     let rid = await client.query({
         text :sql,
