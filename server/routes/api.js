@@ -244,6 +244,20 @@ router.post('/recette', async (req, res) => {
 })
 
 /**
+ * a route that deletes a recipe
+ */
+
+router.delete('/recette',async (req, res) => {
+    let rid = req.body.rid;
+    let sql = 'DELETE FROM recette WHERE rid=$1'
+    let result = await client.query({
+        text:sql,
+        values :[rid]
+    })
+    res.json(result)
+})
+
+/**
  * route that fetches all current user's recipes
  */
 

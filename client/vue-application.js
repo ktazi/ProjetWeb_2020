@@ -23,15 +23,6 @@ const router = new VueRouter({
 var app = new Vue({
     router,
     el: '#app',
-<<<<<<< HEAD
-    
-    methods: {
-        async createUser () {
-            const res = await axios.get('/api/signup')
-        },
-        async connectUser () {
-            const res = await axios.post('/api/signin')
-=======
     methods: { // fonction capable de se mouvoir
         async createUser () {
             const res = await axios.post('/api/signup')
@@ -40,6 +31,7 @@ var app = new Vue({
         async connectUser (user) {
             const res = await axios.get('/api/signin', user)
             console.log(res);
->>>>>>> bc7bdd7333d574bf627f3b71ff74bfd5719536dc
         }
-}})
+    }
+
+})

@@ -49,17 +49,17 @@
         </div>
       </div>
         <div class="row">
-          <div class="col-3 text-center border-right pt-5 pb-5 bg-light" >
-            <div class="mb-5" style="color:#424874">
+          <div class="col-3 text-center border-right pt-5 pb-5 bg-dark text-light" >
+            <div class="mb-5">
               <h3 class="mb-5">Ingrédients</h3>
               <div v-if="display_ing">
                 <ul class="list-group list-group-flush " v-for="ing in recipe.ing">
-                  <li class="mb list-group-item bg-light" >
+                  <li class="mb list-group-item bg-dark" >
                     <p class="lead">{{ing}}</p>
                   </li>
                 </ul>
                 <button @click="ing" class="btn">
-                  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="white" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                   </svg>
                 </button>
@@ -74,16 +74,16 @@
               </div>
 
             </div>
-            <div style="color:#424874">
+            <div class="text-light">
               <h3 class="mb-5" >Materiel</h3>
               <div v-if="display_mat">
                 <ul class="list-group list-group-flush" v-for="mat in recipe.mat">
-                  <li class="mb list-group-item bg-light">
+                  <li class="mb list-group-item bg-dark">
                     <p class="lead">{{mat}}</p>
                   </li>
                 </ul>
                 <button @click="mat" class="btn">
-                  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="white" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                   </svg>
                 </button>
@@ -98,7 +98,7 @@
               </div>
             </div>
           </div>
-          <div class="col-9  border-right pt-5 pb-5 pl-5 pr-5 text-light" style="background-color: #424874">
+          <div class="col-9  border-right pt-5 pb-5 pl-5 pr-5 text-dark bg-light" style="background-color: #424874">
             <h1 class="mb-5">Étapes : </h1>
             <div v-if="display_steps">
               <ul v-for="step in recipe.steps">
@@ -107,7 +107,7 @@
                 </li>
               </ul>
               <button @click="steps" class="btn">
-                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="black" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                 </svg>
               </button>
@@ -121,7 +121,7 @@
               <button class="btn btn-secondary" @click="update_step(true)">OK</button>
             </div>
             <div class="text-right">
-              <button class="button btn-outline-success mb-5 mr-5 rounded-pill pl-2 pt-2 pr-2 pb-2" @click="submit_recipe">
+              <button class="button btn-outline-secondary mb-5 mr-5 rounded-pill pl-2 pt-2 pr-2 pb-2" @click="submit_recipe">
                 <svg width="5em" height="5em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                 </svg>
