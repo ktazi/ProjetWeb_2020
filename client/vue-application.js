@@ -25,11 +25,11 @@ var app = new Vue({
     el: '#app',
     methods: { // fonction capable de se mouvoir
         async createUser () {
-            const res = await axios.post('/api/signup')
+            const res = await axios.get('/api/signup')
             console.log(res);
         },
         async connectUser (user) {
-            const res = await axios.get('/api/signin', user)
+            const res = await axios.post('/api/signin', user)
             console.log(res);
         }
     }
