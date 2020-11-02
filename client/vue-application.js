@@ -17,12 +17,19 @@ const router = new VueRouter({
 var app = new Vue({
     router,
     el: '#app',
+    data:{
+        recttes: []
+    },
     methods: {
         async createUser () {
             const res = await axios.get('/api/signup')
         },
         async connectUser () {
             const res = await axios.post('/api/signin')
+        },
+        async getRecettes(){
+            const res = await axios.get('api/recettes')
+            this.recettes = res.data
         }
     }
 
