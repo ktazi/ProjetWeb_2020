@@ -20,65 +20,51 @@ client.connect()
 router.get('/test', (req, res) => {
     res.json({message : "hello world"})
 })
+
+
 /**
  * sign up route
  */
-    //Inscription
-    router.get('/signin', async(req, res) => {
-    const sql = 'SELECT * FROM users WHERE email=$1';
-    let result = await client.query({
-        text :sql,
-        values : [req.body.email]
-    });
-    if (result.rows.length !== 0)
-    {
-        res.status(400).json({message : "User already in database"});
-        return
-    }
-    let sql2 = "INSERT INTO users (email, pswd) VALUES ( $1, $2) RETURNING *";
-
-    result = result.rows;
-    res.json(result);
+//Inscription
+router.post('/signin', async(req, res) => {
+    let sql = 'SELECT * FROM public."user"'
+    const users = await client.query({
+        text : sql
     })
- /*
+    res.json(users.rows)
+})
+/**
  * sign in route
  */
 // Connexion
-router.post('/signup', async (req, res) => {
+router.get('/signup', async (req, res) => {
     res.json({message : "TODO"})
-    let sql = 'SELECT * FROM users WHERE email=$1'
+    let sql = 'SELECT * FROM public."user"'
     const users = await client.query({
-        text : sql,
-        values: [req.body.email]
+        text : sql
     })
 
-    if (users.rows.length === 0)
-    {
-        res.status(400).json({message : "User not registered"})
-        return
+    const name = req.body.name
+    const met = req.body.met
+    const email = req.body.email
+    const pswd = req.body.pswd
+    const pic = req.body.pic
+
+    if ( email !== '' || pswd !== ''){
+        res.status(400).json({message: "Bad request"})
     }
-    let hashedpassword = checkEmail.rows[0].pswd;
-    let gooduser = await bcrypt.compare(req.body.pswd, hashedpassword);
-    if (!gooduser)
-    {
-        res.json({message : 'wrong password'})
-        return
+    const user = {
+        id: users.rows.length, // Problème lors de supression d'un identifiant
+        name: name,
+        met: met,
+        email: email,
+        pswd: pswd,
+        pic: pic
     }
-    else
-    {
-        let id = checkEmail.rows[0].id;
-        if (typeof req.session.userId === 'undefined') {
-            req.session.userId = -1
-        }
-        if (req.session.userId === id)
-        {
-            res.status(401).json({message : 'User already authentified'})
-            return
-        }
-        req.session.userId = id;
-        res.json({message : 'User authentified'})
-        return
-    }
+    const sml = 'INSERT INTO public."user"(id,name,met,email,pswd,pic)VALUES("+user.id+","+user.name+","+user.met+","+user.email+","user.pswd+","+user.pic+") RETURNING *'
+    await client.query({
+        text: sml
+    })
 })
 
 
