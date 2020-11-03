@@ -26,7 +26,7 @@ router.get('/test', (req, res) => {
  * sign up route
  */
 //Inscription
-router.get('/signin', async(req, res) => {
+router.post('/signin', async(req, res) => {
     let sql = 'SELECT * FROM public."user"'
     const users = await client.query({
         text : sql
@@ -37,7 +37,7 @@ router.get('/signin', async(req, res) => {
  * sign in route
  */
 // Connexion
-router.post('/signup', async (req, res) => {
+router.get('/signup', async (req, res) => {
     res.json({message : "TODO"})
     let sql = 'SELECT * FROM public."user"'
     const users = await client.query({
