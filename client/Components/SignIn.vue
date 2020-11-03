@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <form class="w-75" id="po">
       <div class="text-center">
         <h1 class="display-4 mt-5 mb-5" >Inscription</h1></div>
@@ -33,10 +32,10 @@
         verticalAlign: 'middle',
       }">
           <p id="pp">
-            Aperçu
+            <!--Aperçu--!>
           </p>
         </div>
-        <label for="picpic">Photo de Profil</label>
+        <label for="picpic"></label>
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">Url</div>
@@ -49,7 +48,7 @@
         <label for="exampleFormControlTextarea1">A propos de vous </label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Inscription</button>
+      <button type="button" class="btn btn-outline-primary">Inscription</button>
     </form>
   </div>
 </template>
@@ -83,6 +82,9 @@
 #po{
   margin-left: auto;
   margin-right: auto;
+padding: 2em;
+  border-radius: 5px;
+  box-shadow: 1px 1px 12px black;
 }
 #pp{
   color: white;
@@ -91,5 +93,10 @@
 #coco{
   margin-left: auto;
   margin-right: auto;
+}
+.btn-outline-primary{
+  background-color: #424874;
+  color: white;
+  border: solid 1px #424874;
 }
 </style>
