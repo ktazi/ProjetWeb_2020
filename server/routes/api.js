@@ -27,11 +27,25 @@ router.get('/test', (req, res) => {
  */
 //Inscription
 router.post('/signin', async(req, res) => {
-    let sql = 'SELECT * FROM public."user"'
-    const users = await client.query({
-        text : sql
+
+    const nam = req.body.nam
+    const mett = req.body.mett
+    const email = req.body.email
+    const psw = req.body.psw
+    const pic = req.body.pic
+
+    if ( email === '' || psw === ''){
+        res.status(400).json({message: "Bad request"})
+    }
+    let hash = await bcrypt.hash(psw,10);
+
+    const sml = 'INSERT INTO users (nam,mett,email,psw, pic)VALUES($1,$2,$3,$4,$5) RETURNING *'
+    const result = await client.query({
+        text: sml,
+        values: [nam, mett, email, hash, pic ]
     })
-    res.json(users.rows)
+
+    res.json(result.rows)
 })
 /**
  * sign in route
@@ -39,7 +53,7 @@ router.post('/signin', async(req, res) => {
 // Connexion
 router.get('/signup', async (req, res) => {
     res.json({message : "TODO"})
-    let sql = 'SELECT * FROM public."user"'
+    let sql = 'SELECT * FROM user'
     const users = await client.query({
         text : sql
     })
@@ -54,8 +68,7 @@ router.get('/signup', async (req, res) => {
         res.status(400).json({message: "Bad request"})
     }
     const user = {
-        id: users.rows.length, // Problème lors de supression d'un identifiant
-        name: name,
+        nam: nam,
         met: met,
         email: email,
         pswd: pswd,

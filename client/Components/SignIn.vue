@@ -1,20 +1,55 @@
 <template>
   <div>
-    <form @submit="connectUser">
-      <h2>Se connecter</h2>
-      <div>
-        <label>
-          <input type="email" v-model="user.email" placeholder="email" required>
-        </label>
+
+    <form class="w-75" id="po">
+      <div class="text-center">
+        <h1 class="display-4 mt-5 mb-5" >Inscription</h1></div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Email</label>
+          <input type="email" class="form-control" id="inputEmail4" placeholder="Adresse mail">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputusername">Pseudo</label>
+          <input type="text" class="form-control" id="inputusername" placeholder="Pseudo">
+        </div>
       </div>
-      <div>
-        <label>
-          <input type="password" v-model="user.password" placeholder="mot de passe" required>
-        </label>
+      <div class="form-group">
+        <label for="pass1">Mot de passe</label>
+        <input type="password" class="form-control" id="pass1">
       </div>
-      <div>
-        <button type="submit">Connexion</button>
+      <div class="form-group">
+        <label for="pass2">Verification Mot de passe</label>
+        <input type="password" class="form-control" id="pass2">
       </div>
+      <div class="form-group">
+        <div class="rounded-circle text-center mb-3 border" :style="{
+        backgroundImage: 'url(' +user.pic + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        height:'10vw',
+        width: '10vw',
+        display: 'table-cell',
+        verticalAlign: 'middle',
+      }">
+          <p id="pp">
+            Aperçu
+          </p>
+        </div>
+        <label for="picpic">Photo de Profil</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Url</div>
+          </div>
+          <input type="text" class="form-control" id="picpic" placeholder="Url de votre photo de Profil">
+        <button class="btn btn-outline-secondary" @click="editpic">OK</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">A propos de vous </label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Inscription</button>
     </form>
   </div>
 </template>
@@ -25,15 +60,36 @@
       return{
         user: {
           email: '',
-          password: ''
-        }
+          password: '',
+          pic:'https://thumbs.dreamstime.com/b/ligne-mince-ic-ne-de-chef-96296803.jpg'
+    }
       }
     },
     methods:{
       connectUser(){
         console.log(this.user)
         this.$emit('connect-user', this.user)
+      },
+      editpic(){
+        if (document.getElementById('picpic').value !== ''){
+          this.user.pic = document.getElementById('picpic').value
+        }
       }
     }
   }
 </script>
+
+<style>
+#po{
+  margin-left: auto;
+  margin-right: auto;
+}
+#pp{
+  color: white;
+  mix-blend-mode: difference;
+}
+#coco{
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
