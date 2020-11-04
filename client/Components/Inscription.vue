@@ -1,21 +1,21 @@
 <template>
   <div>
-    <form class="w-75" id="po">
+    <form class="w-75" id="po" @submit="createUser">
       <div class="text-center">
         <h1 class="display-4 mt-5 mb-5" >Inscription</h1></div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Email</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Adresse mail">
+          <input type="email" class="form-control" v-model="user.email" id="inputEmail4" placeholder="Adresse mail">
         </div>
         <div class="form-group col-md-6">
           <label for="inputusername">Pseudo</label>
-          <input type="text" class="form-control" id="inputusername" placeholder="Pseudo">
+          <input type="text" class="form-control" v-model="user.name" id="inputusername" placeholder="Pseudo">
         </div>
       </div>
       <div class="form-group">
         <label for="pass1">Mot de passe</label>
-        <input type="password" class="form-control" id="pass1"placeholder="Mot de passe">
+        <input type="password" class="form-control" v-model="user.password" id="pass1"placeholder="Mot de passe">
       </div>
       <div class="form-group">
         <label for="pass2">Verification Mot de passe</label>
@@ -46,9 +46,9 @@
       </div>
       <div class="form-group">
         <label for="exampleFormControlTextarea1">A propos de vous </label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea v-model="user.metier" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-outline-primary" >Inscription</button>
+      <button type="submit" class="btn btn-outline-primary">Inscription</button>
     </form>
   </div>
 </template>
@@ -58,10 +58,14 @@
     data(){
       return{
         user: {
+          name: '',
+          metier: '',
           email: '',
           password: '',
           pic:'https://thumbs.dreamstime.com/b/ligne-mince-ic-ne-de-chef-96296803.jpg'
-    }}},
+        }
+      }
+    },
     methods:{
       createUser(){
         this.$emit('create-user', this.user)

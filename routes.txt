@@ -34,5 +34,5 @@ put /api/review : Moise
 post /api/recette : Kenza done
     creation d'une recette
     erreur si pas de user connecte
-    parametres dans body : tout le corps de la recett
+    parametres dans body : tout le corps de la recette
 

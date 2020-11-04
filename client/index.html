@@ -31,16 +31,17 @@
                             <router-link class="nav-link" to='/all-recettes'>Recettes populaires</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" to='/Sign-in'>Inscription</router-link>
+                            <router-link class="nav-link" to='/Sign-up'>Inscription</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" to='/Sign-up'>Connexion</router-link>
+                            <router-link class="nav-link" to='/Sign-in'>Connexion</router-link>
                         </li>
                     </ul>
                 </div>
             </nav>
         </header>
         <router-view
+                :users="users"
                 @create-user="createUser"
                 @connect-user="connectUser"
         ></router-view>

@@ -1,8 +1,8 @@
 <template>
-  <form class="w-75" id="po">
+  <form class="w-75" id="po" @submit="connectUser">
     <div class="text-center">
       <h1 class="display-4 mt-5 mb-5 text-center">Connexion</h1>
-        <div class="form-group col-md-6" id="pi">
+        <div class="form-group col-md-6" id="pie">
           <label for="inputEmail4"></label>
           <input type="email" class="form-control" id="inputEmail4" placeholder="Adresse mail">
         </div>
@@ -12,6 +12,7 @@
         </div>
       <button type="submit" class="btn btn-outline-primary mt-5">Se connecter</button>
     </div>
+  </form>
 </template>
 
 <script>
@@ -37,7 +38,7 @@ module.exports = {
           return this.users[i].password === this.user.password
         }
       }
-      this.$emit('connect-user', this.user)
+      this.$emit('connect-user')
     }
   }
 }

@@ -5,9 +5,9 @@ const bcrypt = require('bcrypt')
 const { Client } = require('pg')
 
 const client = new Client({
-    user: 'project_user',
+    user: 'postgres',
     host: 'localhost',
-    password: 'test',
+    password: 'Alex0606',
     database: 'projet'
 })
 
@@ -26,35 +26,30 @@ router.get('/test', (req, res) => {
 //Inscription//
 router.post('/signin', async(req, res) => {
 
-    const nam = req.body.nam
-    const mett = req.body.mett
+    const nam = req.body.name
+    const mett = req.body.metier
     const email = req.body.email
-    const psw = req.body.psw
+    const psw = req.body.password
     const pic = req.body.pic
 
-    const sql = 'SELECT * FROM users WHERE email=$1';
-    const result = await client.query({
-        text: sql,
-        values: [nam, mett, email, psw, pic ]
+    let sql = 'SELECT * FROM public.users'
+    const users = await client.query({
+        text : sql
     })
-    if ( email === '' || psw === ''){
-        res.status(400).json({message: "Bad request"})
-    }
+    const id = users.rows.length
     let hash = await bcrypt.hash(psw,10);
 
-    const sml = 'INSERT INTO users (nam,mett,email,psw, pic)VALUES($1,$2,$3,$4,$5) RETURNING *'
-    result = await client.query({
+    const sml = 'INSERT INTO public.users (id,nam,mett,email,psw, pic)VALUES($1,$2,$3,$4,$5,$6) RETURNING *'
+    const result = await client.query({
         text: sml,
-        values: [nam, mett, email, hash, pic ]
+        values: [id, nam, mett, email, hash, pic]
     })
-    res.json(result.rows)
 })
 /**
  * sign in route
  */
 // Connexion
 router.get('/signup', async (req, res) => {
-    res.json({message : "TODO"})
     let sql = 'SELECT * FROM user'
     const users = await client.query({
         text : sql
@@ -82,7 +77,6 @@ router.get('/signup', async (req, res) => {
     })
 })
 
-
 /**
  * route that gets all recipes
  */
@@ -107,6 +101,7 @@ router.get('/recette', async (req, res) => {
         text :sql,
         values : [id]
     });
+    console.log(result.rows[0].note,'ma note') ;
     res.json(result.rows)
 })
 
@@ -117,12 +112,12 @@ router.get('/recette', async (req, res) => {
 router.put('/recette', async (req, res) => {
     let input = {title : req.body.title,
         picture : req.body.picture,
-        userid : 0,//temporaire
-        steps : req.body.steps,
-        mat:req.body.mat,
-        ing:req.body.ing,
-        tag:req.body.tag,
-        rid: req.body.rid}
+        userid : req.body.userid,//temporaire
+        steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
+        mat:["mat1", "mat2"],//temporaire
+        ing:["ing1","ing2","ing3"],//temporaire
+        tag:["tag1","tag2"],
+        rid: req.body.rid}//temporaire
     let exists = await client.query({
         text : "SELECT * FROM recette WHERE rid=$1",
             values : [input.rid]
@@ -208,11 +203,11 @@ router.put('/recette', async (req, res) => {
 router.post('/recette', async (req, res) => {
     let input = {title : req.body.title,
                     picture : req.body.picture,
-                    userid : 0,//temporaire
-                    steps : req.body.steps,
-                    mat:req.body.mat,
-                    ing:req.body.ing,
-                    tag:req.body.tag}
+                    userid : req.body.userid,//temporaire
+                    steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
+                    mat:["mat1", "mat2"],//temporaire
+                    ing:["ing1","ing2","ing3"],//temporaire
+                    tag:["tag1","tag2"]}//temporaire
     let sql = "INSERT INTO recette (title, picture, userid, nb_not, note) VALUES ( $1, $2, $3,0,0) RETURNING*";
     let rid = await client.query({
         text :sql,
