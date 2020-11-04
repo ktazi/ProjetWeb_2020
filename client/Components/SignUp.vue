@@ -10,7 +10,7 @@
           <label for="pass1"></label>
           <input type="password" class="form-control" id="pass1" placeholder="Mot de passe">
         </div>
-      <button type="button" class="btn btn-outline-primary mt-5">Se connecter</button>
+      <button type="submit" class="btn btn-outline-primary mt-5">Se connecter</button>
     </div>
 </template>
 
@@ -18,16 +18,26 @@
 module.exports = {
   data(){
     return{
-      user: {
+      user: { // utilsateur
         email: '',
         password: ''
       }
     }
   },
+  props:{
+    users: {type: Array, default: []} //bdd
+    },
   methods: {
-    createUser(){
-      console.log(this.user)
-      this.$emit('create-user', this.user)
+    connectUser(){
+      for(let i=0; i< this.users.length; i++){
+        console.log(this.users[i].email, this.user.email)
+        if(this.users[i].email === this.user.email){
+          console.log(this.users[i].password, this.user.password)
+          console.log(this.users[i].password===this.user.password)
+          return this.users[i].password === this.user.password
+        }
+      }
+      this.$emit('connect-user', this.user)
     }
   }
 }

@@ -20,12 +20,10 @@ client.connect()
 router.get('/test', (req, res) => {
     res.json({message : "hello world"})
 })
-
-
 /**
  * sign up route
  */
-//Inscription
+//Inscription//
 router.post('/signin', async(req, res) => {
 
     const nam = req.body.nam
@@ -34,17 +32,21 @@ router.post('/signin', async(req, res) => {
     const psw = req.body.psw
     const pic = req.body.pic
 
+    const sql = 'SELECT * FROM users WHERE email=$1';
+    const result = await client.query({
+        text: sql,
+        values: [nam, mett, email, psw, pic ]
+    })
     if ( email === '' || psw === ''){
         res.status(400).json({message: "Bad request"})
     }
     let hash = await bcrypt.hash(psw,10);
 
     const sml = 'INSERT INTO users (nam,mett,email,psw, pic)VALUES($1,$2,$3,$4,$5) RETURNING *'
-    const result = await client.query({
+    result = await client.query({
         text: sml,
         values: [nam, mett, email, hash, pic ]
     })
-
     res.json(result.rows)
 })
 /**

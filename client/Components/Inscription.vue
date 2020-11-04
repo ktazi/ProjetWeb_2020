@@ -15,11 +15,11 @@
       </div>
       <div class="form-group">
         <label for="pass1">Mot de passe</label>
-        <input type="password" class="form-control" id="pass1">
+        <input type="password" class="form-control" id="pass1"placeholder="Mot de passe">
       </div>
       <div class="form-group">
         <label for="pass2">Verification Mot de passe</label>
-        <input type="password" class="form-control" id="pass2">
+        <input type="password" class="form-control" id="pass2" placeholder="Mot de passe">
       </div>
       <div class="form-group">
         <div class="rounded-circle text-center mb-3 border" :style="{
@@ -32,7 +32,7 @@
         verticalAlign: 'middle',
       }">
           <p id="pp">
-            <!--Aperçu--!>
+            <!--Aperçu -->
           </p>
         </div>
         <label for="picpic"></label>
@@ -48,7 +48,7 @@
         <label for="exampleFormControlTextarea1">A propos de vous </label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
-      <button type="button" class="btn btn-outline-primary">Inscription</button>
+      <button type="submit" class="btn btn-outline-primary" >Inscription</button>
     </form>
   </div>
 </template>
@@ -61,13 +61,10 @@
           email: '',
           password: '',
           pic:'https://thumbs.dreamstime.com/b/ligne-mince-ic-ne-de-chef-96296803.jpg'
-    }
-      }
-    },
+    }}},
     methods:{
-      connectUser(){
-        console.log(this.user)
-        this.$emit('connect-user', this.user)
+      createUser(){
+        this.$emit('create-user', this.user)
       },
       editpic(){
         if (document.getElementById('picpic').value !== ''){
@@ -79,24 +76,24 @@
 </script>
 
 <style>
-#po{
-  margin-left: auto;
-  margin-right: auto;
-padding: 2em;
-  border-radius: 5px;
-  box-shadow: 1px 1px 12px black;
-}
-#pp{
-  color: white;
-  mix-blend-mode: difference;
-}
-#coco{
-  margin-left: auto;
-  margin-right: auto;
-}
-.btn-outline-primary{
-  background-color: #424874;
-  color: white;
-  border: solid 1px #424874;
-}
+  #po{
+    margin-left: auto;
+    margin-right: auto;
+  padding: 2em;
+    border-radius: 5px;
+    box-shadow: 1px 1px 12px black;
+  }
+  #pp{
+    color: white;
+    mix-blend-mode: difference;
+  }
+  #coco{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-outline-primary{
+    background-color: #424874;
+    color: white;
+    border: solid 1px #424874;
+  }
 </style>

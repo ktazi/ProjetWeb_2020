@@ -2,7 +2,7 @@ const Register = window.httpVueLoader('./components/Register.vue')
 const Creation = window.httpVueLoader('./Components/Creation.vue')
 const recettes = window.httpVueLoader('./Components/recettes.vue')
 const Home = window.httpVueLoader('./Components/Home.vue')
-const SignIn = window.httpVueLoader('./Components/SignIn.vue')
+const SignIn = window.httpVueLoader('./Components/Inscription.vue')
 const SignUp = window.httpVueLoader('./Components/SignUp.vue')
 
 const routes = [
@@ -23,15 +23,20 @@ const router = new VueRouter({
 var app = new Vue({
     router,
     el: '#app',
+    props: {
+        users: {type: Array, default: []}
+        },
     methods: { // fonction capable de se mouvoir
-        async createUser () {
-            const res = await axios.post('/api/signup')
+        async createUser (user) {
+            const res = await axios.post('/api/signin', user)
             console.log(res);
         },
-        async connectUser (user) {
-            const res = await axios.get('/api/signin', user)
+        async connectUser () {
             console.log(res);
+        },
+        async mounted(){
+            const res = await axios.get('/api/signup')
+            this.users = res.data
         }
     }
-
 })
