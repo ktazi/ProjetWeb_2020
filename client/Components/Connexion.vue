@@ -2,7 +2,7 @@
   <form class="w-75" id="po" @submit="connectUser">
     <div class="text-center">
       <h1 class="display-4 mt-5 mb-5 text-center">Connexion</h1>
-        <div class="form-group col-md-6" id="pie">
+        <div class="form-group col-md-6" id="pi">
           <label for="inputEmail4"></label>
           <input type="email" class="form-control" id="inputEmail4" placeholder="Adresse mail">
         </div>

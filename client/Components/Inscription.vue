@@ -48,7 +48,7 @@
         <label for="exampleFormControlTextarea1">A propos de vous </label>
         <textarea v-model="user.metier" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-outline-primary">Inscription</button>
+      <button type="submit" class="btn btn-outline-primary" @click="Message">Inscription</button>
     </form>
   </div>
 </template>
@@ -74,9 +74,13 @@
         if (document.getElementById('picpic').value !== ''){
           this.user.pic = document.getElementById('picpic').value
         }
-      }
+      },
+      Message(){
+      var msg="Inscription enregistrée";
+      console.log(msg)
+      alert(msg);
     }
-  }
+  }}
 </script>
 
 <style>
