@@ -36,6 +36,10 @@ router.post('/signin', async(req, res) => {
     const users = await client.query({
         text : sql
     })
+    if (users.rows.length !== 0){
+        res.status(400).json({message : "User already in database"});
+        return
+    }
     const id = users.rows.length
     let hash = await bcrypt.hash(psw,10);
 
@@ -54,7 +58,6 @@ router.get('/signup', async (req, res) => {
     const users = await client.query({
         text : sql
     })
-
     const name = req.body.name
     const met = req.body.met
     const email = req.body.email
@@ -301,6 +304,10 @@ router.put('/review', async (req, res) => {
     res.json(result.rows)
     }
     
+})
+router.get('/acc', (req, res) => {
+
+    res.json({message : "TODO"})
 })
 
 module.exports = router
