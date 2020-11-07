@@ -7,7 +7,7 @@ const Connexion = window.httpVueLoader('./Components/Connexion.vue')
 const Acceuil = window.httpVueLoader('./Components/acc.vue')
 
 const routes = [
-    {path: '/acc/:rid', component:Acceuil},
+    {path: '/acc', component:Acceuil},
     {path: '/recette-create/:rid', component:Creation},
     {path: '/all-recettes', component:recettes},
     {path: '/profile', component:Home},
@@ -29,13 +29,13 @@ var app = new Vue({
         },
     methods: { // fonction capable de se mouvoir
         async createUser (user) {
-            const res = await axios.post('/api/signin', user)
+            const res = await axios.post('/api/Signin', user)
         },
         async connectUser () {
 
         },
         async mounted(){
-            const res = await axios.get('/api/signup')
+            const res = await axios.get('/api/Signup')
             this.users = res.data
         }
     }

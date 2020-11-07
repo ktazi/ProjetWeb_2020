@@ -1,10 +1,10 @@
 <template>
-bouh
+<a>Bouh</a>
 </template>
 
 <script>
-  module.exports{
-  name: "acc.vue"
+  module.exports = {
+
 }
 </script>
 
