@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-md-9 col-lg-8 mx-auto">
                 <h3 class="login-heading mb-4 display-4">Connexion</h3>
-                <form class="w-75" id="po" @submit="connectUser">
+                <form class="w-75" @submit="connectUser">
                   <div class="form-label-group">
                     <input type="email" id="inputEmail" class="form-control" placeholder="Adresse email" required autofocus>
                     <label for="inputEmail">Adresse email</label>
