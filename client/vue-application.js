@@ -7,6 +7,7 @@ const Connexion = window.httpVueLoader('./Components/Connexion.vue')
 const Acceuil = window.httpVueLoader('./Components/acc.vue')
 
 const routes = [
+    {path: '/', component: Acceuil},
     {path: '/acc', component:Acceuil},
     {path: '/recette-create/:rid', component:Creation},
     {path: '/all-recettes', component:recettes},
@@ -14,7 +15,7 @@ const routes = [
     {path: '/recette-update', component:Creation},
     {path: '/Sign-up', component:Inscription},
     {path: '/Sign-in', component:Connexion},
-    { path: '/register', component: Register}
+    {path: '/register', component: Register}
 ]
 
 const router = new VueRouter({
@@ -27,13 +28,11 @@ var app = new Vue({
     props: {
         users: {type: Array, default: []}
         },
-    methods: { // fonction capable de se mouvoir
+    methods: {
         async createUser (user) {
             const res = await axios.post('/api/Signin', user)
         },
-        async connectUser () {
 
-        },
         async mounted(){
             const res = await axios.get('/api/Signup')
             this.users = res.data

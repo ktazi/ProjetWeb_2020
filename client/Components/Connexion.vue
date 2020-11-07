@@ -1,18 +1,31 @@
 <template>
-  <form class="w-75" id="po" @submit="connectUser">
-    <div class="text-center">
-      <h1 class="display-4 mt-5 mb-5 text-center">Connexion</h1>
-        <div class="form-group col-md-6" id="pi">
-          <label for="inputEmail4"></label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Adresse mail">
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-9 col-lg-8 mx-auto">
+                <h3 class="login-heading mb-4">Connexion</h3>
+                <form class="w-75" id="po" @submit="connectUser">
+                  <div class="form-label-group">
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Adresse email" required autofocus>
+                    <label for="inputEmail">Adresse email</label>
+                  </div>
+                  <div class="form-label-group">
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de Passe" required>
+                    <label for="inputPassword">Mot de Passe</label>
+                  </div>
+                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Se connecter</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="form-group col-md-6" id="pi">
-          <label for="pass1"></label>
-          <input type="password" class="form-control" id="pass1" placeholder="Mot de passe">
-        </div>
-      <button type="submit" class="btn btn-outline-primary mt-5">Se connecter</button>
+      </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -44,22 +57,58 @@ module.exports = {
 }
 </script>
 <style>
-#pi{
-  margin-right: auto;
-  margin-left: auto ;
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
 }
-#po{
-  margin-right: auto;
-  margin-left: auto ;
-  box-shadow: 1px 1px 12px black;
-  padding: 1em;
+.login,
+.image {
+  min-height: 100vh;
 }
-.btn-outline-primary{
+.bg-image {
+  background-image: url('https://i.f1g.fr/media/madame/1900x1900/sites/default/files/img/2016/08/pays-photo-8.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.login-heading {
+  font-weight: 300;
+}
+.btn-login {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
   background-color: #424874;
   color: white;
   border: solid 1px #424874;
 }
-footer{
-  border: aqua;
+/* style champ à remplir*/
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group>input,
+.form-label-group>label {
+  padding: var(--input-padding-y) var(--input-padding-x);
+  height: auto;
+  border-radius: 2rem;
+}
+.form-label-group>label {
+  position: absolute;
+  top: 0;
+  display: block;
+  margin-bottom: 0;
+  cursor: text;
+  border: 1px solid transparent;
+}
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3);
+}
+.form-label-group input:not(:placeholder-shown)~label {
+  padding-top: calc(var(--input-padding-y) / 3);
+  padding-bottom: calc(var(--input-padding-y) / 3);
+  font-size: 12px;
+  color: #424874;
 }
 </style>
