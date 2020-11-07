@@ -7,7 +7,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-9 col-lg-8 mx-auto">
-                <h3 class="login-heading mb-4">Connexion</h3>
+                <h3 class="login-heading mb-4 display-4">Connexion</h3>
                 <form class="w-75" id="po" @submit="connectUser">
                   <div class="form-label-group">
                     <input type="email" id="inputEmail" class="form-control" placeholder="Adresse email" required autofocus>
@@ -66,7 +66,7 @@ module.exports = {
   min-height: 100vh;
 }
 .bg-image {
-  background-image: url('https://i.f1g.fr/media/madame/1900x1900/sites/default/files/img/2016/08/pays-photo-8.jpg');
+  background-image: url('https://p0.storage.canalblog.com/05/69/149189/95538870.jpg');
   background-size: cover;
   background-position: center;
 }
