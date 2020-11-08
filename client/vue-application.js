@@ -14,8 +14,8 @@ const routes = [
     {path: '/all-recettes', component:recettes},
     {path: '/profile', component:Home},
     {path: '/recette-update', component:Creation},
-    {path: '/Sign-up', component:Inscription},
-    {path: '/Sign-in', component:Connexion},
+    {path: '/SignUp', component:Inscription},
+    {path: '/SignIn', component:Connexion},
     {path: '/register', component: Register},
     {path: '/test', component: RecetteDis}
 ]
@@ -27,16 +27,18 @@ const router = new VueRouter({
 var app = new Vue({
     router,
     el: '#app',
+
     props: {
         users: {type: Array, default: []}
         },
+
     methods: {
         async createUser (user) {
-            const res = await axios.post('/api/Signin', user)
+            const res = await axios.post('/api/SignIn', user)
         },
 
         async mounted(){
-            const res = await axios.get('/api/Signup')
+            const res = await axios.get('/api/SignUp')
             this.users = res.data
         }
     }

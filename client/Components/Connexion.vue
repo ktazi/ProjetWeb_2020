@@ -40,7 +40,7 @@ module.exports = {
   },
   props:{
     users: {type: Array, default: []} //bdd
-    },
+  },
   methods: {
     connectUser(){
       for(let i=0; i< this.users.length; i++){
@@ -86,7 +86,6 @@ module.exports = {
   position: relative;
   margin-bottom: 1rem;
 }
-
 .form-label-group>input,
 .form-label-group>label {
   padding: var(--input-padding-y) var(--input-padding-x);

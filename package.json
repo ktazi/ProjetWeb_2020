@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node bin/http_server",
-    "test" :  "ls"
+    "test": "ls"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

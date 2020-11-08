@@ -31,9 +31,7 @@
         display: 'table-cell',
         verticalAlign: 'middle',
       }">
-          <p id="pp">
-            <!--Aperçu -->
-          </p>
+          <p id="pp"></p>
         </div>
         <label for="picpic"></label>
         <div class="input-group mb-2 mr-sm-2">

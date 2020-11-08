@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-
 const bcrypt = require('bcrypt')
 const { Client } = require('pg')
 
@@ -14,130 +13,74 @@ const client = new Client({
 client.connect()
 
 /**
- * phony routes, for debug sessions
- */
-
-router.get('/test', (req, res) => {
-    res.json({message : "hello world"})
-})
-/**
  * sign up route
  */
 //Inscription//
-router.post('/signin', async(req, res) => {
 
+router.post('/signin', async(req, res) => {
     const nam = req.body.name
     const mett = req.body.metier
     const email = req.body.email
     const psw = req.body.password
     const pic = req.body.pic
-
+    console.log( nam, mett, email, psw, pic)
     let sql = 'SELECT * FROM public.users'
     const users = await client.query({
         text : sql
-    })
+})
     if (users.rows.length !== 0){
-        res.status(400).json({message : "User already in database"});
-        return
+        for (let i = 0; i < users.rows.length; i++){
+            console.log(users.rows[i])
+            if(users.rows[i].email === email){
+                res.status(400).json({message : "User already in database"});
+                return
+            }
+        }
     }
     const id = users.rows.length
     let hash = await bcrypt.hash(psw,10);
     const sml = 'INSERT INTO public.users (id,nam,mett,email,psw, pic)VALUES($1,$2,$3,$4,$5,$6) RETURNING *'
     const result = await client.query({
         text: sml,
-        values: [id, nam, mett, email, hash, pic]
+            values: [id, nam, mett, email, hash, pic]
+        })
     })
-})
+
+
 /**
  * sign in route
  */
-async function verifUtilisateur(email){
-    const sql = "SELECT count(*) FROM user WHERE email=$1"
-    const res = await client.query({
-        text : sql,
-        values:[email]
-    })
-    return parseInt(res.rows[0].count)
-}
-
-async function insert(nam,mett,email,psw, pic){
-    const hash = await bcrypt.hash(psw, 10)
-    const s = "SELECT * FROM users"
-    const re = await client.query({
-        text : s,
-        values:[]
-    })
-    if(re.rowCount === 0){
-        const sql = "INSERT INTO users(nam,mett,email,psw, pic) values ($1, $2, $3,$4,$5)"
-        const res = await client.query({
-            text : sql,
-            values:[nam,mett,email,hash, pic]
-        })
-        console.log(res)
-        return res.rowCount
-    }
 // Connexion
-router.get('/signup', async (req, res) => {
-    let sql = 'SELECT * FROM user'
+router.post('/signup', async (req, res) => {
+    let sql = 'SELECT * FROM public.users'
     const users = await client.query({
         text : sql
     })
-    const name = req.body.name
-    const met = req.body.met
+    const nam = req.body.name
+    const mett = req.body.mett
     const email = req.body.email
-    const pswd = req.body.pswd
+    const psw = req.body.psw
     const pic = req.body.pic
 
-    if ( email !== '' || pswd !== ''){
+    if ( email !== '' || psw !== ''){
         res.status(400).json({message: "Bad request"})
     }
     const user = {
         nam: nam,
-        met: met,
+        mett: mett,
         email: email,
-        pswd: pswd,
+        psw: psw,
         pic: pic
     }
-    const sml = 'INSERT INTO public."user"(id,name,met,email,pswd,pic)VALUES("+user.id+","+user.name+","+user.met+","+user.email+","user.pswd+","+user.pic+") RETURNING *'
+    const sml = 'INSERT INTO public.users(id,nam,mett,email,psw,pic)VALUES("+user.id+","+user.nam+","+user.mett+","+user.email+","user.psw+","+user.pic+") RETURNING *'
     await client.query({
         text: sml
     })
-    verifUtilisateur(email2).then(function(result){
-        if( result === 1){
-            verifMDP(email2, mdp).then(function(result){
-                if(result === 1){
-                    returnID(email2).then(function(result){
-                        if(result === req.session.userId){
-                            createUser(req.session.userId).then(function (result){
-                                req.session.User.user.push(result[0])
-                                user.push(result[0])
-                                res.json({user: req.session.User.user, message: 'Vous êtes déjà connecté'}).status(401)
-                            })
-                        }
-                        else{
-                            req.session.userId = result
-                            createUser(req.session.userId).then(function (result){
-                                user.push(result[0])
-                                req.session.User.user.push(result[0])
-                                console.log(req.session.User.user)
-                                res.json({user: req.session.User.user, message: 'Connecté'}).status(401)
-                            })
-                        }
-                    })
-                }
-                else
-                    res.json({ message: 'Mot de passe incorrect' }).status(401)
-            })
-        }
-        else
-            res.json({ message: 'Email incorrect' }).status(401)
-    })
 })
-}
-
+/*
 /**
  * route that gets all recipes
- */
+
 
 router.get('/recettes', async (req, res) => {
     let sql = 'SELECT * FROM recette'
@@ -145,7 +88,7 @@ router.get('/recettes', async (req, res) => {
         text: sql
     })
     res.json(result.rows)
-    
+
 })
 
 /**
@@ -178,7 +121,7 @@ router.put('/recette', async (req, res) => {
         rid: req.body.rid}//temporaire
     let exists = await client.query({
         text : "SELECT * FROM recette WHERE rid=$1",
-            values : [input.rid]
+        values : [input.rid]
     })
     if (exists.rows.length < 1){
         res.json(null)
@@ -260,12 +203,12 @@ router.put('/recette', async (req, res) => {
 
 router.post('/recette', async (req, res) => {
     let input = {title : req.body.title,
-                    picture : req.body.picture,
-                    userid : req.body.userid,//temporaire
-                    steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
-                    mat:["mat1", "mat2"],//temporaire
-                    ing:["ing1","ing2","ing3"],//temporaire
-                    tag:["tag1","tag2"]}//temporaire
+        picture : req.body.picture,
+        userid : req.body.userid,//temporaire
+        steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
+        mat:["mat1", "mat2"],//temporaire
+        ing:["ing1","ing2","ing3"],//temporaire
+        tag:["tag1","tag2"]}//temporaire
     let sql = "INSERT INTO recette (title, picture, userid, nb_not, note) VALUES ( $1, $2, $3,0,0) RETURNING*";
     let rid = await client.query({
         text :sql,
@@ -330,7 +273,7 @@ router.delete('/recette',async (req, res) => {
  */
 
 router.get('/myrecettes', (req, res) => {
-    
+
     res.json({message : "TODO"})
 })
 
@@ -344,22 +287,23 @@ router.put('/review', async (req, res) => {
     }
     else{
         let note = req.body.note
-    const id = req.body.rid;
-    const sql2 ="UPDATE recette set note=$1 WHERE rid=$2"
-    await client.query({
-        text: sql2,
-        values: [note, id]
-    })
+        const id = req.body.rid;
+        const sql2 ="UPDATE recette set note=$1 WHERE rid=$2"
 
-    const sql ="SELECT * FROM recette WHERE rid=$1"
-    let result =  await client.query({
-        text: sql,
-        values:[id]
-    });
-    res.json(result.rows)
+        await client.query({
+            text: sql2,
+            values: [note, id]
+        })
+
+        const sql ="SELECT * FROM recette WHERE rid=$1"
+        let result =  await client.query({
+            text: sql,
+            values:[id]
+        });
+        res.json(result.rows)
     }
-    
 })
+
 router.get('/acc', (req, res) => {
 
     res.json({message : "TODO"})
