@@ -51,6 +51,31 @@ router.post('/signin', async(req, res) => {
 /**
  * sign in route
  */
+async function verifUtilisateur(email){
+    const sql = "SELECT count(*) FROM user WHERE email=$1"
+    const res = await client.query({
+        text : sql,
+        values:[email]
+    })
+    return parseInt(res.rows[0].count)
+}
+
+async function insert(nam,mett,email,psw, pic){
+    const hash = await bcrypt.hash(psw, 10)
+    const s = "SELECT * FROM users"
+    const re = await client.query({
+        text : s,
+        values:[]
+    })
+    if(re.rowCount === 0){
+        const sql = "INSERT INTO users(nam,mett,email,psw, pic) values ($1, $2, $3,$4,$5)"
+        const res = await client.query({
+            text : sql,
+            values:[nam,mett,email,hash, pic]
+        })
+        console.log(res)
+        return res.rowCount
+    }
 // Connexion
 router.get('/signup', async (req, res) => {
     let sql = 'SELECT * FROM user'
@@ -77,7 +102,38 @@ router.get('/signup', async (req, res) => {
     await client.query({
         text: sml
     })
+    verifUtilisateur(email2).then(function(result){
+        if( result === 1){
+            verifMDP(email2, mdp).then(function(result){
+                if(result === 1){
+                    returnID(email2).then(function(result){
+                        if(result === req.session.userId){
+                            createUser(req.session.userId).then(function (result){
+                                req.session.User.user.push(result[0])
+                                user.push(result[0])
+                                res.json({user: req.session.User.user, message: 'Vous êtes déjà connecté'}).status(401)
+                            })
+                        }
+                        else{
+                            req.session.userId = result
+                            createUser(req.session.userId).then(function (result){
+                                user.push(result[0])
+                                req.session.User.user.push(result[0])
+                                console.log(req.session.User.user)
+                                res.json({user: req.session.User.user, message: 'Connecté'}).status(401)
+                            })
+                        }
+                    })
+                }
+                else
+                    res.json({ message: 'Mot de passe incorrect' }).status(401)
+            })
+        }
+        else
+            res.json({ message: 'Email incorrect' }).status(401)
+    })
 })
+}
 
 /**
  * route that gets all recipes
