@@ -5,6 +5,7 @@ const Home = window.httpVueLoader('./Components/Home.vue')
 const Inscription = window.httpVueLoader('./Components/Inscription.vue')
 const Connexion = window.httpVueLoader('./Components/Connexion.vue')
 const Acceuil = window.httpVueLoader('./Components/acc.vue')
+const RecetteDis = window.httpVueLoader('./Components/Recette_display.vue')
 
 const routes = [
     {path: '/', component: Acceuil},
@@ -15,7 +16,8 @@ const routes = [
     {path: '/recette-update', component:Creation},
     {path: '/Sign-up', component:Inscription},
     {path: '/Sign-in', component:Connexion},
-    {path: '/register', component: Register}
+    {path: '/register', component: Register},
+    {path: '/test', component: RecetteDis}
 ]
 
 const router = new VueRouter({

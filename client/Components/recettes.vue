@@ -1,30 +1,67 @@
 <template>
 
-    <div>
-        <p>If this is on the screen, then I've successfully linked the 2</p>
-        <div v-for="recette in recettes" :key="recette.rid">
-            <div class="recetteName">
-                {{recette.title}} 
-                
+    <div class="text-center">
+      <h1 class="display-4  mt-3 mb-5">Recettes populaires</h1>
+      <div id="allrecettes" class="pl-5 pr-5">
+        <ul v-for="recette in recettes" class="list-group-item" id="liste">
+          <li class="media list-group-item-light flex-xl-row flex-lg-row flex-md-row flex-sm-column">
+            <img :src='recette.picture' alt="image" width="200vw" height="200vw">
+            <div class="media-body">
+              <h5 class="mt-0 mb-1">{{recette.title}}</h5>
+              <br>
+              <div class="row ml-2">
+                <div v-for="tag in recette.tag">
+                  <p class="mr-1">{{tag}}</p>
+                </div>
+              </div>
             </div>
-            <div class="recetteImage" > 
-                  <div :style=" { backgroundImage: 'url(' + recette.picture + ')' }  ">  </div>  lll
+            <div class="flex-column">
+              <stars :note="recette.note"></stars>
+              <button class="btn btn-outline-secondary" @click="">Consulter la recette</button>
+              <button class="btn btn-outline-secondary" @click="">Noter</button>
             </div>
-            <div class="recettesCorps">
-                   {{recette.note}}
-                   {{recette.steps}}
-            </div>
+          </li>
+        </ul>
+      </div>
 
-        </div>
-        <button @click="title_sort()" >
-                test
-            </button>
-        <p>If this is on the screen, then I've successfully linked the 2</p>
+      <button @click="title_sort()" >
+        test
+      </button>
     </div>
 </template>
 
 
 <script>
+Vue.component('stars', {
+  props : ['note'],
+  mounted(){
+    if(this.note !== undefined){
+      for(let i = 1; i <= 5; i++)
+      {
+        this.stars.push(this.note >= i);
+      }
+    }
+  },
+  data: function () {
+    return {
+      stars : []
+    }
+  },
+  template: `<div >
+  <p>Moyenne : {{this.note}} </p>
+  <div class="row" style="margin-left: auto; margin-right: auto">
+    <div v-for="star in stars">
+      <div v-if="star">
+        <p class="fa fa-star " style="color:orange"></p>
+      </div>
+      <div v-else>
+        <p class="fa fa-star"></p>
+      </div>
+    </div>
+  </div>
+
+  </div>`
+})
     module.exports = {
     data(){
         return {
@@ -62,13 +99,9 @@
     </script>
 
 <style>
-    .recetteImage {
-        height: 30%;
-        height: 20px;
-        width: 20px;
-        flex-direction: column;
-        margin-bottom: 5px;
-        border-bottom : #aaaaaa 1px solid;
+    #allrecettes{
+      margin-left: auto;
+      margin-right: auto;
     }
 </style>
  

@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const { Client } = require('pg')
 
 const client = new Client({
-    user: 'postgres',
+    user: 'project_user',
     host: 'localhost',
     password: 'test',
     database: 'projet'
@@ -42,7 +42,6 @@ router.post('/signin', async(req, res) => {
     }
     const id = users.rows.length
     let hash = await bcrypt.hash(psw,10);
-
     const sml = 'INSERT INTO public.users (id,nam,mett,email,psw, pic)VALUES($1,$2,$3,$4,$5,$6) RETURNING *'
     const result = await client.query({
         text: sml,

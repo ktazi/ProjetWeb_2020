@@ -73,7 +73,7 @@ module.exports = {
     <div class="text-center mt-5 mb-5">
       <router-link :to="{ path : '/recette-create/'+ '-1' }" tag="button" class="btn btn-outline-secondary">Créer une nouvelle recette</router-link>
     </div>
-    <div class="jumbotron" id="groupe">
+    <div class="jumbotron mb-0" id="groupe">
       <ul v-for="recette in recettes" class="list-group-item w-75" id="liste">
         <li class="media list-group-item-light flex-xl-row flex-lg-row flex-md-row flex-sm-column">
           <img :src='recette.picture' alt="image" width="200vw" height="200vw">

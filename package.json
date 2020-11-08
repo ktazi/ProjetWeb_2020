@@ -2,7 +2,8 @@
   "name": "Projet_web",
   "version": "1.0.0",
   "scripts": {
-    "start": "node bin/http_server"
+    "start": "node bin/http_server",
+    "test" :  "ls"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
