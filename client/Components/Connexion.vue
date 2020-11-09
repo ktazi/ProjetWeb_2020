@@ -10,11 +10,11 @@
                 <h3 class="login-heading mb-4 display-4">Connexion</h3>
                 <form class="w-75" @submit="connectUser">
                   <div class="form-label-group">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Adresse email" required autofocus>
+                    <input type="email" v-model="user.email" id="inputEmail" class="form-control" placeholder="Adresse email" required autofocus>
                     <label for="inputEmail">Adresse email</label>
                   </div>
                   <div class="form-label-group">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de Passe" required>
+                    <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Mot de Passe" required>
                     <label for="inputPassword">Mot de Passe</label>
                   </div>
                   <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" @click="Message">Se connecter</button>
