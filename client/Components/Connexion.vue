@@ -17,7 +17,7 @@
                     <input type="password" id="inputPassword" class="form-control" placeholder="Mot de Passe" required>
                     <label for="inputPassword">Mot de Passe</label>
                   </div>
-                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Se connecter</button>
+                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" @click="Message">Se connecter</button>
                 </form>
               </div>
             </div>
@@ -39,7 +39,7 @@ module.exports = {
     }
   },
   props:{
-    users: {type: Array, default: []} //bdd
+    users: {type: Array, default: []} //bdd permettant de récuérer le valeurs de ma base de données
   },
   methods: {
     connectUser(){
@@ -52,6 +52,11 @@ module.exports = {
         }
       }
       this.$emit('connect-user')
+    },
+    Message(){
+      var msg="Connexion établie";
+      console.log(msg)
+      alert(msg);
     }
   }
 }

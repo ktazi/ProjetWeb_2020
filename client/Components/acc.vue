@@ -1,5 +1,6 @@
 <template>
   <header>
+    //Carroussel de photo
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -7,7 +8,7 @@
       <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-        <div class="carousel-item active" style="background-image: url('https://i.f1g.fr/media/madame/1900x1900/sites/default/files/img/2017/04/jambinette-de-poulpe.jpg')">
+      <div class="carousel-item active" style="background-image: url('https://i.f1g.fr/media/madame/1900x1900/sites/default/files/img/2017/04/jambinette-de-poulpe.jpg')">
         <div class="carousel-caption d-none d-md-block">
           <h3 class="display-4">Jambinette de Poulpe</h3>
           <p class="lead">Au menu, poulpe en cocotte, oignons, tomates, olives noires et Pastis.</p>
@@ -35,9 +36,50 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  </header>
-BIMMMMMMM
-  </section>
+    //Section Texte et présentation
+    <section class="py-5">
+      <div class="container">
+        <h1 class="display-4">Bienvenu sur Kitch'</h1>
+        <p class="lead">Pas inspiré pour cuisiner? Kitch' est le site de cuisine qui aide les étudiants à cuisiner !
+          « Recette facile et rapide pas chère pour débutant ». Ca vous fait penser à une recherche google ? Plus besoins de faire une recherche, vous trouverez tout sur notre site! Alors rejoignez nous!
+        </p>
+      </div>
+    </section>
+    //Section Qui sommes nous
+    <div class="container">
+      <div><h1 class="display-5">Qui sommes-nous?</h1><br></div>
+      <div class="row">
+        <!-- Kenza -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-0 shadow">
+            <img src="https://media-exp1.licdn.com/dms/image/C4E03AQGxCtDSmqBXiA/profile-displayphoto-shrink_400_400/0?e=1610582400&v=beta&t=z6VndwCZiQeVFxMdoGzQl6Q53VqHH1lFh2Ay5vOrpxs" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+              <h5 class="card-title mb-0">La Chef </h5>
+              <div class="card-text text-black-50">Kenza Tazi</div>
+            </div>
+          </div>
+        </div>
+        <!-- Moise  -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-0 shadow">
+            <img src="https://source.unsplash.com/9UVmlIb0wJU/500x350" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+              <h5 class="card-title mb-0">Le second de cuisine </h5>
+              <div class="card-text text-black-50">Moise Iloo</div>
+            </div>
+          </div>
+        </div>
+        <!-- Constance  -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-0 shadow">
+            <img src="https://media-exp1.licdn.com/dms/image/C4E03AQHyTt1wEp2pGg/profile-displayphoto-shrink_400_400/0?e=1610582400&v=beta&t=TWXW1Po-cQGCgOt077g6Qz2CLqO5zYbeTZn6qOCZwgw" class="card-img-top">
+            <div class="card-body text-center">
+              <h5 class="card-title mb-0">La chef de partie</h5>
+              <div class="card-text text-black-50">Constance Garbado</div>
+            </div>
+          </div>
+        </div>
+    </header>
 </template>
 
 <script>

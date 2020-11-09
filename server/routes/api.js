@@ -35,6 +35,10 @@ router.post('/signin', async(req, res) => {
                 res.status(400).json({message : "User already in database"});
                 return
             }
+            else{
+                res.status(200).json({ message: 'Succès, vous pouvez vous connecter !' })
+                return
+            }
         }
     }
     const id = users.rows.length
@@ -48,40 +52,83 @@ router.post('/signin', async(req, res) => {
 
 
 /**
- * sign in route
+ * sign in route: CONNEXION
  */
+
+async function checkuser(email){
+    const sql = "SELECT count(*) FROM public.users WHERE email=$1"
+    const res = await client.query({
+        text : sql,
+        values:[email]
+    })
+    return parseInt(res.rows[0].count)
+}
+async function verifMDP(email, psw){
+    const sql = "SELECT psw FROM public.users WHERE email=$1"
+    const res = await client.query({
+        text : sql,
+        values:[email]
+    })
+    if (await bcrypt.compare(psw, res.rows[0].mdp)) {
+        return 1
+    } else {
+        return 0
+    }
+}
+async function returnID(email){
+    const sql = "SELECT id FROM public.users WHERE email=$1"
+    const res = await client.query({
+        text : sql,
+        values:[email]
+    })
+    return parseInt(res.rows[0].id)
+}
+async function createUser(id){
+    const sql = "SELECT * FROM public.users WHERE id=$1"
+    const res = await client.query({
+        text: sql,
+        values: [id]
+    })
+    return res.rows
+}
 // Connexion
 router.post('/signup', async (req, res) => {
-    let sql = 'SELECT * FROM public.users'
-    const users = await client.query({
-        text : sql
-    })
-    const nam = req.body.name
-    const mett = req.body.mett
-    const email = req.body.email
-    const psw = req.body.psw
-    const pic = req.body.pic
-
-    if ( email !== '' || psw !== ''){
-        res.status(400).json({message: "Bad request"})
-    }
-    const user = {
-        nam: nam,
-        mett: mett,
-        email: email,
-        psw: psw,
-        pic: pic
-    }
-    const sml = 'INSERT INTO public.users(id,nam,mett,email,psw,pic)VALUES("+user.id+","+user.nam+","+user.mett+","+user.email+","user.psw+","+user.pic+") RETURNING *'
-    await client.query({
-        text: sml
+    let email = req.body.email
+    let psw = req.body.password
+    checkuser(email).then(function(result){
+        if( result === 1){
+            verifMDP(email, psw).then(function(result){
+                if(result === 1){
+                    returnID(email).then(function(result){
+                        if(result === req.session.userId){
+                            createUser(req.session.userId).then(function (result){
+                                req.session.User.user.push(result[0])
+                                user.push(result[0])
+                                res.json({user: req.session.User.user, message: 'Vous êtes déjà connecté'}).status(401)
+                            })
+                        }
+                        else{
+                            req.session.userId = result
+                            createUser(req.session.userId).then(function (result){
+                                user.push(result[0])
+                                req.session.User.user.push(result[0])
+                                res.json({user: req.session.User.user, message: 'Connecté'}).status(401)
+                            })
+                        }
+                    })
+                }
+                else
+                    res.json({ message: 'Mot de passe incorrect' }).status(401)
+            })
+        }
+        else
+            res.json({ message: 'Email incorrect' }).status(401)
     })
 })
+
 /*
-/**
  * route that gets all recipes
-
-
+ */
 router.get('/recettes', async (req, res) => {
     let sql = 'SELECT * FROM recette'
     let result = await client.query({
