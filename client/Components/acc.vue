@@ -1,6 +1,5 @@
 <template>
   <header>
-    //Carroussel de photo
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -36,18 +35,16 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-    //Section Texte et présentation
     <section class="py-5">
       <div class="container">
-        <h1 class="display-4">Bienvenu sur Kitch'</h1>
+        <h1 class="display-3">Bienvenu sur Kitch'</h1>
         <p class="lead">Pas inspiré pour cuisiner? Kitch' est le site de cuisine qui aide les étudiants à cuisiner !
           « Recette facile et rapide pas chère pour débutant ». Ca vous fait penser à une recherche google ? Plus besoins de faire une recherche, vous trouverez tout sur notre site! Alors rejoignez nous!
         </p>
       </div>
     </section>
-    //Section Qui sommes nous
     <div class="container">
-      <div><h1 class="display-5">Qui sommes-nous?</h1><br></div>
+      <div><h1 class="display-4">Qui sommes-nous?</h1><br></div>
       <div class="row">
         <!-- Kenza -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -62,7 +59,7 @@
         <!-- Moise  -->
         <div class="col-xl-3 col-md-6 mb-4">
           <div class="card border-0 shadow">
-            <img src="https://source.unsplash.com/9UVmlIb0wJU/500x350" class="card-img-top" alt="...">
+            <img src="https://media-exp1.licdn.com/dms/image/C4D03AQG-_BvxIxERIw/profile-displayphoto-shrink_400_400/0?e=1610582400&v=beta&t=DQN5L8eXxg2J-onDPh5OI7kWHozwrpPH7rIXXm0oUcg" class="card-img-top" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title mb-0">Le second de cuisine </h5>
               <div class="card-text text-black-50">Moise Iloo</div>
