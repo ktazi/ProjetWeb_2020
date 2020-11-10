@@ -17,7 +17,12 @@
                     <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Mot de Passe" required>
                     <label for="inputPassword">Mot de Passe</label>
                   </div>
-                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" @click="Message">Se connecter</button>
+                  <div v-if="message === 'Connecté'">
+                    <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Se connecter</button>
+                  </div>
+                  <div v-else>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Se connecter</button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -32,14 +37,14 @@
 module.exports = {
   data(){
     return{
-      user: { // utilsateur
+      user: {
         email: '',
         password: ''
       }
     }
   },
   props:{
-    users: {type: Array, default: []} //bdd permettant de récuérer le valeurs de ma base de données
+    message:''
   },
   methods: {
     connectUser(){
@@ -51,7 +56,7 @@ module.exports = {
           return this.users[i].password === this.user.password
         }
       }
-      this.$emit('connect-user')
+      this.$emit('connect-user', this.user)
     },
     Message(){
       var msg="Connexion établie";

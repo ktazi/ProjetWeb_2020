@@ -39,7 +39,7 @@
             <div class="input-group-text">Url</div>
           </div>
           <input type="text" class="form-control" id="picpic" placeholder="Url de votre photo de Profil">
-        <button class="btn btn-outline-secondary" @click="editpic">OK</button>
+          <button class="btn btn-outline-secondary" @click="editpic">OK</button>
         </div>
       </div>
       <div class="form-group">
@@ -52,28 +52,28 @@
 </template>
 
 <script>
-  module.exports = {
-    data(){
-      return{
-        user: {
-          name: '',
-          metier: '',
-          email: '',
-          password: '',
-          pic:'https://thumbs.dreamstime.com/b/ligne-mince-ic-ne-de-chef-96296803.jpg'
-        }
+module.exports = {
+  data(){
+    return{
+      user: {
+        name: '',
+        metier: '',
+        email: '',
+        password: '',
+        pic:'https://thumbs.dreamstime.com/b/ligne-mince-ic-ne-de-chef-96296803.jpg'
+      }
+    }
+  },
+  methods:{
+    createUser(){
+      this.$emit('create-user', this.user)
+    },
+    editpic(){
+      if (document.getElementById('picpic').value !== ''){
+        this.user.pic = document.getElementById('picpic').value
       }
     },
-    methods:{
-      createUser(){
-        this.$emit('create-user', this.user)
-      },
-      editpic(){
-        if (document.getElementById('picpic').value !== ''){
-          this.user.pic = document.getElementById('picpic').value
-        }
-      },
-      Message(){
+    Message(){
       var msg="Inscription enregistrée";
       console.log(msg)
       alert(msg);
@@ -82,24 +82,24 @@
 </script>
 
 <style>
-  #po{
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2em;
-    border-radius: 5px;
-    box-shadow: 1px 1px 12px black;
-  }
-  #pp{
-    color: white;
-    mix-blend-mode: difference;
-  }
-  #coco{
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .btn-outline-primary{
-    background-color: #424874;
-    color: white;
-    border: solid 1px #424874;
-  }
+#po{
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2em;
+  border-radius: 5px;
+  box-shadow: 1px 1px 12px black;
+}
+#pp{
+  color: white;
+  mix-blend-mode: difference;
+}
+#coco{
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-outline-primary{
+  background-color: #424874;
+  color: white;
+  border: solid 1px #424874;
+}
 </style>

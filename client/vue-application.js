@@ -27,16 +27,23 @@ const router = new VueRouter({
 var app = new Vue({
     router,
     el: '#app',
-
+    data:{
+        users:[]
+    },
     props: {
         users: {type: Array, default: []}
-        },
+    },
 
     methods: {
-        async createUser (user) {
+        async connectUser(user) {
             const res = await axios.post('/api/SignIn', user)
+            this.message = res.data.message
+            this.user = res.data.user
         },
-
+        async createUser (users) {
+            const res = await axios.post('/api/SignUp', users)
+            this.users.push(res.data)
+        },
         async mounted(){
             const res = await axios.get('/api/SignUp')
             this.users = res.data
