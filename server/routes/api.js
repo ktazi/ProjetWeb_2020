@@ -17,7 +17,7 @@ client.connect()
  */
 //Inscription//
 
-router.post('/signin', async(req, res) => {
+router.post('/SignUp', async(req, res) => {
     const nam = req.body.name
     const mett = req.body.metier
     const email = req.body.email
@@ -48,6 +48,8 @@ router.post('/signin', async(req, res) => {
 
 /*Connexion*/
 router.post('/signup', async (req, res) => {
+
+})
 /*
  * route that gets all recipes
  */
@@ -279,3 +281,4 @@ router.get('/acc', (req, res) => {
 })
 
 module.exports = router
+
