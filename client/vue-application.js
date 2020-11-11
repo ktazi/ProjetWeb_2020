@@ -47,6 +47,11 @@ var app = new Vue({
         async mounted(){
             const res = await axios.get('/api/SignUp')
             this.users = res.data
+        },
+        async logout() {
+            await axios.post('/api/logout')
+            this.panier.articles = []
+            this.user = undefined
         }
     }
 })

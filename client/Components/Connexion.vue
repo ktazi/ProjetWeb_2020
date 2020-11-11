@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" @submit="connectUser">
     <div class="row no-gutter">
       <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
       <div class="col-md-8 col-lg-6">
@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-md-9 col-lg-8 mx-auto">
                 <h3 class="login-heading mb-4 display-4">Connexion</h3>
-                <form class="w-75" @submit="connectUser">
+                <form class="w-75">
                   <div class="form-label-group">
                     <input type="email" v-model="user.email" id="inputEmail" class="form-control" placeholder="Adresse email" required autofocus>
                     <label for="inputEmail">Adresse email</label>
@@ -21,7 +21,7 @@
                     <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Se connecter</button>
                   </div>
                   <div v-else>
-                    <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Se connecter</button>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"> Se connecter</button>
                   </div>
                 </form>
               </div>
@@ -52,7 +52,8 @@ module.exports = {
         console.log(this.users[i].email, this.user.email)
         if(this.users[i].email === this.user.email){
           console.log(this.users[i].password, this.user.password)
-          console.log(this.users[i].password===this.user.password)
+          console.log(this.users[i].password === this.user.password)
+          console.log("WESH")
           return this.users[i].password === this.user.password
         }
       }

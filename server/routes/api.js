@@ -47,8 +47,46 @@ router.post('/SignUp', async(req, res) => {
 })
 
 /*Connexion*/
-router.post('/signup', async (req, res) => {
+router.post('/SignIn', async (req, res) => {
+    const sql = 'SELECT * FROM public.users WHERE email=$1';
+    let checkEmail = await client.query({
+        text :sql,
+        values : [req.body.email]
+    });
+    if (checkEmail.rows.length === 0){
+        res.status(400).json({message : "User not registered"})
+        return
+    }
+    let hashedpassword = checkEmail.rows[0].password;
+    let gooduser = await bcrypt.compare(req.body.password, hashedpassword);
+    if (!gooduser){
+        res.json({message : 'wrong password'})
+        return
+    }
+    else{
+        let id = checkEmail.rows[0].id;
+        if (typeof req.session.userId === 'undefined') {
+            req.session.userId = -1
+        }
+        if (req.session.userId === id)
+        {
+            res.status(401).json({message : 'User already authentified'})
+            return
+        }
+        req.session.userId = id;
+        res.json({message : 'User authentified'})
+        return
+    }
+})
 
+
+router.post('/logout', (req, res)=>{
+    if(req.session.user.data){
+        req.session.user.data = undefined
+        res.send()
+    }else{
+        res.status(400).json({message:'Vous n étiez pas connecté'})
+    }
 })
 /*
  * route that gets all recipes
