@@ -36,9 +36,8 @@ var app = new Vue({
 
     methods: {
         async connectUser(user) {
-            const res = await axios.post('/api/SignIn', user)
-            this.message = res.data.message
-            this.user = res.data.user
+            console.log("Wesh")
+            /**/
         },
         async createUser (users) {
             const res = await axios.post('/api/SignUp', users)

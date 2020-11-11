@@ -46,7 +46,11 @@
         <label for="exampleFormControlTextarea1">A propos de vous </label>
         <textarea v-model="user.metier" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-outline-primary" @click="Message">Inscription</button>
+      <div class="text-center">
+        <button type="submit" class="btn btn-outline-primary col w-25" @click="Message">Inscription</button>
+        <br>
+        <router-link to="/SignIn" id="lien">Déjà inscrit ? Connectez-vous ici</router-link>
+      </div>
     </form>
   </div>
 </template>

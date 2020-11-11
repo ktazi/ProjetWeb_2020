@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <div>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -8,19 +8,19 @@
     </ol>
     <div class="carousel-inner" role="listbox">
       <div class="carousel-item active" style="background-image: url('https://i.f1g.fr/media/madame/1900x1900/sites/default/files/img/2017/04/jambinette-de-poulpe.jpg')">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-md-block">
           <h3 class="display-4">Jambinette de Poulpe</h3>
           <p class="lead">Au menu, poulpe en cocotte, oignons, tomates, olives noires et Pastis.</p>
         </div>
       </div>
       <div class="carousel-item" style="background-image: url('https://i0.wp.com/clemfoodie.com/wp-content/uploads/2018/03/poke_bowl_2.jpg?fit=3024%2C4032&ssl=1')">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-md-block">
           <h3 class="display-4">Poke bowls</h3>
           <p class="lead">La spécialité culinaire colorée tout droit venue d'Hawaï</p>
         </div>
       </div>
       <div class="carousel-item" style="background-image: url('https://i.pinimg.com/originals/87/d1/57/87d157cdeb19dbdf7b6136bd9fa99273.jpg')">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-md-block">
           <h3 class="display-4">Rougaille Saucisse </h3>
           <p class="lead">Une spécialité typique de la Réunion pour une chouette réunion de famille.</p>
         </div>
@@ -76,7 +76,9 @@
             </div>
           </div>
         </div>
-    </header>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

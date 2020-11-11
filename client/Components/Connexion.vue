@@ -8,23 +8,44 @@
             <div class="row">
               <div class="col-md-9 col-lg-8 mx-auto">
                 <h3 class="login-heading mb-4 display-4">Connexion</h3>
-                <form class="w-75">
+                <form class="w-75 text-center">
                   <div class="form-label-group">
-                    <input type="email" v-model="user.email" id="inputEmail" class="form-control" placeholder="Adresse email" required autofocus>
+                    <input type="email" v-model="user.email" id="inputEmail" class="form-control" placeholder="Adresse email">
                     <label for="inputEmail">Adresse email</label>
                   </div>
                   <div class="form-label-group">
-                    <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Mot de Passe" required>
+                    <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Mot de Passe">
                     <label for="inputPassword">Mot de Passe</label>
                   </div>
-                  <div v-if="message === 'Connecté'">
-                    <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Se connecter</button>
-                  </div>
-                  <div v-else>
-                    <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"> Se connecter</button>
-                  </div>
+                  <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" data-toggle="modal" data-target="#exampleModal">Se connecter</button>
+                  <router-link to="/SignUp" id="lien">Pas encore inscrit ? Faites le ici !</router-link>
+
                 </form>
               </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Connexion de l'utilisateur</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{message}}
+          </div>
+          <div class="modal-footer">
+            <div v-if="connect">
+              <router-link to='/profile' data-dismiss="modal" class="btn btn-info">OK</router-link>
+            </div>
+            <div v-else>
+              <button data-dismiss="modal" class="btn btn-danger">Réessayer</button>
             </div>
           </div>
         </div>
@@ -40,29 +61,17 @@ module.exports = {
       user: {
         email: '',
         password: ''
-      }
+      },
+      message : '',
+      connect : false
     }
   },
-  props:{
-    message:''
-  },
   methods: {
-    connectUser(){
-      for(let i=0; i< this.users.length; i++){
-        console.log(this.users[i].email, this.user.email)
-        if(this.users[i].email === this.user.email){
-          console.log(this.users[i].password, this.user.password)
-          console.log(this.users[i].password === this.user.password)
-          console.log("WESH")
-          return this.users[i].password === this.user.password
-        }
-      }
-      this.$emit('connect-user', this.user)
-    },
-    Message(){
-      var msg="Connexion établie";
-      console.log(msg)
-      alert(msg);
+    async connectUser(){
+      const res = await axios.post('/api/SignIn', this.user);
+      console.log(res.data);
+      this.message = res.data.message;
+      this.connect = res.data.connect;
     }
   }
 }
@@ -120,5 +129,9 @@ module.exports = {
   padding-bottom: calc(var(--input-padding-y) / 3);
   font-size: 12px;
   color: #424874;
+}
+#lien{
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

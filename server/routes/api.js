@@ -12,19 +12,35 @@ const client = new Client({
 
 client.connect()
 
+router.use((req, res, next)=>{
+    if (typeof req.session.userId === 'undefined') {
+        req.session.userId = -1;
+    }
+    next()
+})
+
+
+router.get('/me', (req, res)=>{
+    res.json({user : req.session.userId})
+})
+
+
+router.get('/allusers', ( async(req, res)=>{
+    let result = await client.query('SELECT * from users');
+    res.json(result.rows);
+}))
+
+
 /**
  * sign up route
  */
-//Inscription//
-
 router.post('/SignUp', async(req, res) => {
     const nam = req.body.name
     const mett = req.body.metier
     const email = req.body.email
     const psw = req.body.password
     const pic = req.body.pic
-    console.log( nam, mett, email, psw, pic)
-    let sql = 'SELECT * FROM public.users'
+    let sql = 'SELECT * FROM users'
     const users = await client.query({
         text : sql
     })
@@ -39,54 +55,49 @@ router.post('/SignUp', async(req, res) => {
     }
     const id = users.rows.length
     let hash = await bcrypt.hash(psw,10);
-    const sml = 'INSERT INTO public.users (id,nam,mett,email,psw, pic)VALUES($1,$2,$3,$4,$5,$6) RETURNING *'
+    const sml = 'INSERT INTO users (id,nam,mett,email,psw, pic)VALUES($1,$2,$3,$4,$5,$6) RETURNING *'
     const result = await client.query({
         text: sml,
         values: [id, nam, mett, email, hash, pic]
     })
+    res.json(result.rows);
 })
 
 /*Connexion*/
 router.post('/SignIn', async (req, res) => {
-    const sql = 'SELECT * FROM public.users WHERE email=$1';
+    const sql = 'SELECT * FROM users WHERE email=$1';
+    console.log(req.body.email);
     let checkEmail = await client.query({
         text :sql,
         values : [req.body.email]
     });
     if (checkEmail.rows.length === 0){
-        res.status(400).json({message : "User not registered"})
+        res.json({message : "Utilisateur non connecté", connect : false})
         return
     }
-    let hashedpassword = checkEmail.rows[0].password;
+    let hashedpassword = checkEmail.rows[0].psw;
     let gooduser = await bcrypt.compare(req.body.password, hashedpassword);
     if (!gooduser){
-        res.json({message : 'wrong password'})
+        res.json({message : 'Mauvais mot de passe', connect : false})
         return
     }
     else{
         let id = checkEmail.rows[0].id;
-        if (typeof req.session.userId === 'undefined') {
-            req.session.userId = -1
-        }
         if (req.session.userId === id)
         {
-            res.status(401).json({message : 'User already authentified'})
+            res.json({message : 'Utilisateur déjà authentifié', connect : false})
             return
         }
         req.session.userId = id;
-        res.json({message : 'User authentified'})
+        res.json({message : 'Succès de la connexion', connect : true})
         return
     }
 })
 
 
 router.post('/logout', (req, res)=>{
-    if(req.session.user.data){
-        req.session.user.data = undefined
-        res.send()
-    }else{
-        res.status(400).json({message:'Vous n étiez pas connecté'})
-    }
+    req.session.userId = -1;
+    res.json({message : "Utilisateur déconnecté"})
 })
 /*
  * route that gets all recipes
