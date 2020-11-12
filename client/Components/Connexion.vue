@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" @submit="connectUser">
+  <div class="container-fluid">
     <div class="row no-gutter">
       <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
       <div class="col-md-8 col-lg-6">
@@ -17,13 +17,11 @@
                     <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Mot de Passe">
                     <label for="inputPassword">Mot de Passe</label>
                   </div>
-                  <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" data-toggle="modal" data-target="#exampleModal">Se connecter</button>
+                  <button type="submit" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" data-toggle="modal" data-target="#exampleModal" @click="connectUser">Se connecter</button>
                   <router-link to="/SignUp" id="lien">Pas encore inscrit ? Faites le ici !</router-link>
-
                 </form>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -66,6 +64,14 @@ module.exports = {
       connect : false
     }
   },
+   async mounted(){
+     let u = await axios.get('/api/me')
+     if(u.data.length !== 0){
+       alert('Veuillez vous déconnecter')
+       location.replace('http://localhost:3000/?#/profile')
+     }
+   }
+  ,
   methods: {
     async connectUser(){
       const res = await axios.post('/api/SignIn', this.user);

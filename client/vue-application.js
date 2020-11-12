@@ -27,30 +27,6 @@ const router = new VueRouter({
 var app = new Vue({
     router,
     el: '#app',
-    data:{
-        users:[]
-    },
-    props: {
-        users: {type: Array, default: []}
-    },
-
     methods: {
-        async connectUser(user) {
-            console.log("Wesh")
-            /**/
-        },
-        async createUser (users) {
-            const res = await axios.post('/api/SignUp', users)
-            this.users.push(res.data)
-        },
-        async mounted(){
-            const res = await axios.get('/api/SignUp')
-            this.users = res.data
-        },
-        async logout() {
-            await axios.post('/api/logout')
-            this.panier.articles = []
-            this.user = undefined
-        }
     }
 })

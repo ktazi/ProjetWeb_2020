@@ -20,8 +20,12 @@ router.use((req, res, next)=>{
 })
 
 
-router.get('/me', (req, res)=>{
-    res.json({user : req.session.userId})
+router.get('/me', async( req, res)=>{
+    let user = await client.query({
+            text : 'SELECT * FROM users WHERE id=$1',
+            values:[req.session.userId]
+    })
+    res.json(user.rows)
 })
 
 
@@ -46,11 +50,12 @@ router.post('/SignUp', async(req, res) => {
     const users = await client.query({
         text : sql
     })
+    if (nam === '' || mett === '' || email === '' || psw === '' || pic === '')
+        res.json({message : "Champs incorrectement remplis", success:false});
     if (users.rows.length !== 0){
         for (let i = 0; i < users.rows.length; i++){
-            console.log(users.rows[i])
             if(users.rows[i].email === email){
-                res.status(400).json({message : "User already in database"});
+                res.json({message : "Adresse email deja utilisee", success:false});
                 return
             }
         }
@@ -62,19 +67,18 @@ router.post('/SignUp', async(req, res) => {
         text: sml,
         values: [id, nam, mett, email, hash, pic]
     })
-    res.json(result.rows);
+    res.json({message : "Inscription réussie !", success:true});
 })
 
 /*Connexion*/
 router.post('/SignIn', async (req, res) => {
     const sql = 'SELECT * FROM users WHERE email=$1';
-    console.log(req.body.email);
     let checkEmail = await client.query({
         text :sql,
         values : [req.body.email]
     });
     if (checkEmail.rows.length === 0){
-        res.json({message : "Utilisateur non connecté", connect : false})
+        res.json({message : "Email mauvais", connect : false})
         return
     }
     let hashedpassword = checkEmail.rows[0].psw;
@@ -124,7 +128,6 @@ router.get('/recette', async (req, res) => {
         text :sql,
         values : [id]
     });
-    console.log(result.rows[0].note,'ma note') ;
     res.json(result.rows)
 })
 
@@ -133,14 +136,16 @@ router.get('/recette', async (req, res) => {
  */
 
 router.put('/recette', async (req, res) => {
-    let input = {title : req.body.title,
+    let input = {
+        title : req.body.title,
         picture : req.body.picture,
-        userid : req.body.userid,//temporaire
-        steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
-        mat:["mat1", "mat2"],//temporaire
-        ing:["ing1","ing2","ing3"],//temporaire
-        tag:["tag1","tag2"],
-        rid: req.body.rid}//temporaire
+        userid : req.session.userId,
+        steps : req.body.steps,
+        mat:req.body.mat,
+        ing:req.body.ing,
+        tag:req.body.tag,
+        rid: req.body.rid
+    }
     let exists = await client.query({
         text : "SELECT * FROM recette WHERE rid=$1",
         values : [input.rid]
@@ -158,6 +163,11 @@ router.put('/recette', async (req, res) => {
     await client.query({
         text :sql,
         values : [input.title,input.rid]
+    });
+    sql ="UPDATE recette SET userid = $1 WHERE rid=$2"
+    await client.query({
+        text :sql,
+        values : [input.userid,input.rid]
     });
     await client.query({
             text : "UPDATE recette SET steps = '{}' WHERE rid=$1",
@@ -198,7 +208,6 @@ router.put('/recette', async (req, res) => {
             values : [input.ing[i],input.rid]
         });
     }
-
     await client.query({
             text : "UPDATE recette SET tag = '{}' WHERE rid=$1",
             values : [input.rid]
@@ -226,11 +235,11 @@ router.put('/recette', async (req, res) => {
 router.post('/recette', async (req, res) => {
     let input = {title : req.body.title,
         picture : req.body.picture,
-        userid : req.body.userid,//temporaire
-        steps : ["etape 1", "etape2", "etape3"],//temporaire, juste pour les tests
-        mat:["mat1", "mat2"],//temporaire
-        ing:["ing1","ing2","ing3"],//temporaire
-        tag:["tag1","tag2"]}//temporaire
+        userid : req.session.userId,
+        steps : req.body.steps,
+        mat: req.body.mat,
+        ing: req.body.ing,
+        tag:req.body.tag}
     let sql = "INSERT INTO recette (title, picture, userid, nb_not, note) VALUES ( $1, $2, $3,0,0) RETURNING*";
     let rid = await client.query({
         text :sql,
@@ -245,6 +254,11 @@ router.post('/recette', async (req, res) => {
             values : [input.steps[i],rid]
         });
     }
+    sql ="UPDATE recette SET userid = $1 WHERE rid=$2"
+    await client.query({
+        text :sql,
+        values : [input.userid, input.rid]
+    });
     let sql3 = "UPDATE recette SET mat = array_append(mat, $1) WHERE rid=$2;"
     for (let i = 0; i < input.mat.length; i++)
     {
@@ -294,9 +308,12 @@ router.delete('/recette',async (req, res) => {
  * route that fetches all current user's recipes
  */
 
-router.get('/myrecettes', (req, res) => {
-
-    res.json({message : "TODO"})
+router.get('/myrecettes', async(req, res) => {
+    let rec = await client.query({
+        text : 'SELECT * FROM recette WHERE userid=$1',
+        values:[req.session.userId]
+    })
+    res.json(rec.rows)
 })
 
 /**
@@ -304,26 +321,7 @@ router.get('/myrecettes', (req, res) => {
  */
 
 router.put('/review', async (req, res) => {
-    if(req.session.userid ==='undefined'){
-        res.send(401).json({message : 'user is not connected'})
-    }
-    else{
-        let note = req.body.note
-        const id = req.body.rid;
-        const sql2 ="UPDATE recette set note=$1 WHERE rid=$2"
 
-        await client.query({
-            text: sql2,
-            values: [note, id]
-        })
-
-        const sql ="SELECT * FROM recette WHERE rid=$1"
-        let result =  await client.query({
-            text: sql,
-            values:[id]
-        });
-        res.json(result.rows)
-    }
 })
 
 router.get('/acc', (req, res) => {
