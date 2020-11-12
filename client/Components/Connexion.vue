@@ -70,7 +70,6 @@ module.exports = {
        alert('Veuillez vous déconnecter')
        location.replace('http://localhost:3000/?#/profile')
      }
-
    }
   ,
   methods: {

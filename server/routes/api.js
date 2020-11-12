@@ -321,26 +321,7 @@ router.get('/myrecettes', async(req, res) => {
  */
 
 router.put('/review', async (req, res) => {
-    if(req.session.userid ==='undefined'){
-        res.send(401).json({message : 'user is not connected'})
-    }
-    else{
-        let note = req.body.note
-        const id = req.body.rid;
-        const sql2 ="UPDATE recette set note=$1 WHERE rid=$2"
 
-        await client.query({
-            text: sql2,
-            values: [note, id]
-        })
-
-        const sql ="SELECT * FROM recette WHERE rid=$1"
-        let result =  await client.query({
-            text: sql,
-            values:[id]
-        });
-        res.json(result.rows)
-    }
 })
 
 router.get('/acc', (req, res) => {
