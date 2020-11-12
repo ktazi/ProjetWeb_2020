@@ -35,10 +35,10 @@ module.exports = {
     return {
       recettes : [],
       user :{
-        pic : 'https://d.wattpad.com/story_parts/762675348/images/15b4642e8297068c533870519747.png',
-        name : 'Kenza',
-        met : 'Programmeuse en herbe',
-        email : 'kenza.tazi@efrei.net',
+        pic : 'https://www.xovi.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
+        name : '',
+        met : '',
+        email : '',
       },
       sup : 0
     };
@@ -50,10 +50,23 @@ module.exports = {
     async delete_recette() {
       await axios.delete('/api/recette', {data :{rid:this.sup.toString()}})
       location.reload();
+    },
+    async logout(){
+      await axios.post('/api/logout');
+      location.replace('http://localhost:3000/#/SignIn')
     }
   },
   async mounted (){
-    this.recettes = await axios.get('/api/recettes')
+    let userId = await axios.get('/api/me');
+    if (userId.data.length === 0){
+      alert("Veuillez vous connecter")
+      location.replace('http://localhost:3000/?#/SignIn')
+    }
+    this.user.name = userId.data[0].nam
+    this.user.pic = userId.data[0].pic
+    this.user.email = userId.data[0].email
+    this.user.met = userId.data[0].mett
+    this.recettes = await axios.get('/api/myrecettes')
     this.recettes = this.recettes.data
   }
 }
@@ -67,6 +80,7 @@ module.exports = {
         <h1 class="display-4">{{user.name}}</h1>
         <p class="lead">{{user.email}}</p>
         <p class="blockquote">{{user.met}}</p>
+        <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal2">Logout</button>
       </div>
     </div>
     <h2 class="display-4 text-center" style="color:#424874">Mes recettes</h2>
@@ -109,6 +123,25 @@ module.exports = {
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal" @click="delete_recette">Supprimer la recette</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2" >Deconnexion de l'utilisateur</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Voulez-vous vraiment vous déconnecter ?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" @click="logout">Déconnexion</button>
           </div>
         </div>
       </div>
