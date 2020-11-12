@@ -38,6 +38,8 @@ router.get('/allusers', ( async(req, res)=>{
 /**
  * sign up route
  */
+//Inscription//
+
 router.post('/SignUp', async(req, res) => {
     const nam = req.body.name
     const mett = req.body.metier
