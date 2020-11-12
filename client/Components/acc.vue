@@ -35,14 +35,15 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-    <section class="py-5">
-      <div class="container">
-        <h1 class="display-3">Bienvenu sur Kitch'</h1>
-        <p class="lead">Pas inspiré pour cuisiner? Kitch' est le site de cuisine qui aide les étudiants à cuisiner !
-          « Recette facile et rapide pas chère pour débutant ». Ca vous fait penser à une recherche google ? Plus besoins de faire une recherche, vous trouverez tout sur notre site! Alors rejoignez nous!
-        </p>
-      </div>
-    </section>
+  <section class="py-5">
+    <div class="container">
+      <h1 class="display-3">Bienvenu sur Kitch'</h1><br>
+      <p class="lead">Pas inspiré pour cuisiner? Kitch' est le site de cuisine qui aide les étudiants à cuisiner !
+        « Recette facile et rapide pas chère pour débutant ». Ca vous fait penser à une recherche google ? Plus besoins de faire une recherche, vous trouverez tout sur notre site! Alors rejoignez nous!
+      </p>
+    </div>
+  </section>
+  <section>
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2">
@@ -58,28 +59,26 @@
         </div>
       </div>
     </div>
-    <section>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="p-5">
-              <img class="img-fluid rounded-circle" src="https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
-            </div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle"  id = "image" src="https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
           </div>
-          <div class="col-lg-6">
-            <div class="p-5">
-              <h2 class="display-4">Ca arrive !!!!! </h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-            </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-5">
+            <h2 class="display-4">Ca arrive !!!!! </h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2">
           <div class="p-5">
-            <img class="img-fluid rounded-circle"  src ="https://images.unsplash.com/photo-1514517220017-8ce97a34a7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
+            <img class="img-fluid img-rounded" id="image" src ="https://images.unsplash.com/photo-1514517220017-8ce97a34a7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
           </div>
         </div>
         <div class="col-lg-6 order-lg-1">
@@ -90,7 +89,8 @@
         </div>
       </div>
     </div>
-    <div class="container">
+  </section>
+  <div class="container">
     <section class="section-padding text-center" id="pres">
     <div class="container">
       <div><h1 class="display-4">Qui sommes-nous?</h1><br></div>
@@ -122,14 +122,6 @@
             <div class="card-body text-center">
               <h5 class="card-title mb-0">Constance Garbado</h5>
               <div class="card-text text-black-50">Une petite description?</div>
-              <div class="faded">
-                <ul class="ftco-social d-flex">
-                  <li class="ftco-animate fadeInUp ftco-animated"><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li class="ftco-animate fadeInUp ftco-animated"><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li class="ftco-animate fadeInUp ftco-animated"><a href="#"><span class="icon-google-plus"></span></a></li>
-                  <li class="ftco-animate fadeInUp ftco-animated"><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
@@ -154,20 +146,16 @@
     background-size: cover;
   }
   #pres{
-   width: 100%;
+  width: 100%;
   height: 100%;
   border-top: 1px solid rgba(114, 71, 158, 0.5);
   padding-top: 5em;
   }
-  .ftco-social {
-    padding: 0;
-  }
-  .ftco-social li {
-    list-style: none;
-    margin-right: 10px;
-  }
-  .ftco-animate {
-    opacity: 0;
-    visibility: hidden;
+  #image{
+    display: block;
+    width: 500px;
+    height: 500px;
+    margin: 25px auto;
+    border-radius: 50%;
   }
 </style>
