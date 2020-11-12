@@ -15,7 +15,7 @@
 <body>
     <div id="app">
         <header>
-            <nav class="navbar navbar-dark py-3" style="background-color: #424874;" >
+            <nav class="navbar transparent navbar-dark navbar-collapse py-3" >
                 <router-link class="navbar-brand mb-0 h1" to='/'>KITCH'</router-link>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -41,6 +41,7 @@
                 </div>
             </nav>
         </header>
+
         <router-view
                 @create-user="createUser"
                 @connect-user="connectUser"
@@ -71,5 +72,9 @@
         color: #424874;
         background-color: white;
         border-radius: 5px;
+    }
+    .navbar {
+        opacity: 0.8;
+        background-color: #424874;
     }
 </style>
