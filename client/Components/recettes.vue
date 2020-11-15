@@ -71,11 +71,6 @@ Vue.component('stars', {
     async mounted(){
         const res = await axios.get('/api/recettes')
         this.recettes = res.data
-        console.log(this.recettes)
-        console.log(this.recettes.length)
-        console.log(this.recettes[0].title[0])
-        console.log("A".charCodeAt(0))
-        
     },
     methods:{
         //tri ordre alphabetique de titres

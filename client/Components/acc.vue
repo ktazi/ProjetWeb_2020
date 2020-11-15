@@ -101,7 +101,7 @@
             <img src="https://media-exp1.licdn.com/dms/image/C4E03AQGxCtDSmqBXiA/profile-displayphoto-shrink_400_400/0?e=1610582400&v=beta&t=z6VndwCZiQeVFxMdoGzQl6Q53VqHH1lFh2Ay5vOrpxs" class="card-img-top" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title mb-0">Kenza Tazi</h5>
-              <div class="card-text text-black-50">Une petite description?</div>
+              <div class="card-text text-black-50">Programmeuse en herbe</div>
             </div>
           </div>
         </div>
@@ -134,7 +134,9 @@
           </div>
         </div>
     </div>
+  </div>
     </section>
+    </div>
   </div>
 </template>
 
