@@ -1,9 +1,16 @@
 <template>
   <div class="mb-0" id="image">
-      <div class="container bg-light w-75" id="r">
-        <h1 class="text-center">Test</h1>
+    <div class="row">
+      <div class="col-xl-9 col-lg-10 mx-auto text-center">
+        <div class="bg-faded rounded p-5">
+          <h1 class="section-heading mb-4">
+            <span class="section-heading-upper">Ma recette</span>
+          </h1>
+          <p> Et la Kenza on peut mettre le texte :)</p>
+        </div>
       </div>
     </div>
+  </div>
 </template>
 <script>
 module.exports = {
@@ -24,9 +31,14 @@ module.exports = {
 </script>
 <style>
   #image{
-    background-image : url("https://www.wallpapertip.com/wmimgs/77-776716_high-resolution-pizza-background.jpg");
-    background-repeat: no-repeat;
-    height: 1080px;
-    border : 1px solid black;
+    background-image : url("https://images.unsplash.com/photo-1514237487632-b60bc844a47d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80");
+    background-size: auto;
+    height: 1000px;
+
+  }
+  .bg-faded {
+    background-color: rgba(255,255,255,.95);
+    display: block;
+    margin-top: 100px;
   }
 </style>
