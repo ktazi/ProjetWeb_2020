@@ -1,7 +1,6 @@
 <template>
   <div id="main">
     <div>
-
         <div class="jumbotron mb-0" :style="{ backgroundImage: 'url(' + recipe.picture + ')', backgroundSize: 'cover' }">
           <div v-if="display_title">
             <div class="row justify-content-center">

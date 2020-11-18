@@ -17,7 +17,7 @@ const routes = [
     {path: '/SignUp', component:Inscription},
     {path: '/SignIn', component:Connexion},
     {path: '/register', component: Register},
-    {path: '/test', component: RecetteDis}
+    {path: '/display/:rid', component: RecetteDis}
 ]
 
 const router = new VueRouter({

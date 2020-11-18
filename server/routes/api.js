@@ -424,9 +424,15 @@ router.post('/best', async(req,res)=>{
 
 
 
-router.get('/acc', (req, res) => {
-
-    res.json({message: "TODO"})
+router.post('/comments', async(req, res) => {
+    let input = {
+        rid : req.body.rid
+    }
+    let resu = await client.query({
+        text : 'select * from coms where rid=$1',
+        values : [input.rid]
+    })
+    res.json(resu.rows)
 })
 
 module.exports = router
