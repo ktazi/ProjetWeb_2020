@@ -1,6 +1,6 @@
 const Register = window.httpVueLoader('./components/Register.vue')
 const Creation = window.httpVueLoader('./Components/Creation.vue')
-const recettes = window.httpVueLoader('./Components/recettes.vue')
+const recettes = window.httpVueLoader('./Components/browse.vue')
 const Home = window.httpVueLoader('./Components/Home.vue')
 const Inscription = window.httpVueLoader('./Components/Inscription.vue')
 const Connexion = window.httpVueLoader('./Components/Connexion.vue')
