@@ -2,7 +2,7 @@
   <div class="mb-0" id="image">
     <div class="row">
       <div class="col-xl-9 col-lg-10 mx-auto text-center">
-        <div class="bg-faded rounded p-5">
+        <div class="bg-faded p-5">
           <h1 class="section-heading mb-4">
             <span class="section-heading-upper">Ma recette</span>
           </h1>
@@ -31,8 +31,7 @@ module.exports = {
 </script>
 <style>
   #image{
-    background-image : url("https://images.unsplash.com/photo-1514237487632-b60bc844a47d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80");
-    background-size: auto;
+    background-image: url("fofo.png");
     height: 1000px;
 
   }
@@ -41,4 +40,4 @@ module.exports = {
     display: block;
     margin-top: 100px;
   }
-</style>
+  <img src="fofo.png" height="1125" width="1932"/><img src="fofo.png" height="1125" width="1932"/></style>

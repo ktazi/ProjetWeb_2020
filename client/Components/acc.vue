@@ -19,10 +19,10 @@
           <p class="lead">La spécialité culinaire colorée tout droit venue d'Hawaï</p>
         </div>
       </div>
-      <div class="carousel-item" style="background-image: url('https://i.pinimg.com/originals/87/d1/57/87d157cdeb19dbdf7b6136bd9fa99273.jpg')">
+      <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1584973544695-07da66d42318?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80')">
         <div class="carousel-caption d-md-block">
-          <h3 class="display-4">Rougaille Saucisse </h3>
-          <p class="lead">Une spécialité typique de la Réunion pour une chouette réunion de famille.</p>
+          <h3 class="display-4"> Nouilles sautées au piment </h3>
+          <p class="lead">Une spécialité typique du Laos pour un chouette repas exotique.</p>
         </div>
       </div>
     </div>
@@ -37,9 +37,9 @@
   </div>
   <section class="py-5">
     <div class="container">
-      <h1 class="display-3">Bienvenu sur Kitch'</h1><br>
-      <p class="lead">Pas inspiré pour cuisiner? Kitch' est le site de cuisine qui aide les étudiants à cuisiner !
-        « Recette facile et rapide pas chère pour débutant ». Ca vous fait penser à une recherche google ? Plus besoins de faire une recherche, vous trouverez tout sur notre site! Alors rejoignez nous!
+      <h1 class="display-3 text-center">Bienvenu sur Kitch'</h1><br><hr>
+      <br></br><p class="lead">Pas inspiré pour cuisiner? Kitch' est le site de cuisine qui aide les étudiants à cuisiner !
+        <br>« Recette facile et rapide pas chère pour débutant ». Ca vous fait penser à une recherche google ? Plus besoins de faire une recherche, vous trouverez tout sur notre site! Alors rejoignez nous!
       </p>
     </div>
   </section>
@@ -117,7 +117,7 @@
         </div>
         <!-- Constance  -->
         <div class="col-xl-3 col-md-6 mb-4">
-          <div class="card border-0 shadow">
+          <div class="card border-0 shadow" id="hov">
             <img src="https://media-exp1.licdn.com/dms/image/C4E03AQHyTt1wEp2pGg/profile-displayphoto-shrink_400_400/0?e=1610582400&v=beta&t=TWXW1Po-cQGCgOt077g6Qz2CLqO5zYbeTZn6qOCZwgw" class="card-img-top">
             <div class="card-body text-center">
               <h5 class="card-title mb-0">Constance Garbado</h5>
@@ -159,5 +159,11 @@
     height: 500px;
     margin: 25px auto;
     border-radius: 50%;
+  }
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(114, 71, 158, 0.5);
   }
 </style>
