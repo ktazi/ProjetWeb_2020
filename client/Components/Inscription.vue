@@ -2,7 +2,7 @@
   <div>
     <form class="w-75" id="po" @submit="createUser">
       <div class="text-center">
-        <h1 class="display-4 mt-5 mb-5" >Inscription</h1></div>
+        <h1 class="display-4 mt-5 mb-5">Inscription</h1></div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Email</label>
@@ -15,7 +15,7 @@
       </div>
       <div class="form-group">
         <label for="pass1">Mot de passe</label>
-        <input type="password" class="form-control" v-model="user.password" id="pass1"placeholder="Mot de passe">
+        <input type="password" class="form-control" v-model="user.password" id="pass1" placeholder="Mot de passe">
       </div>
       <div class="form-group">
         <div class="rounded-circle text-center mb-3 border" :style="{
@@ -34,7 +34,8 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Url</div>
           </div>
-          <input type="text" v-model="user.pic" class="form-control" id="picpic" placeholder="Url de votre photo de Profil">
+          <input type="text" v-model="user.pic" class="form-control" id="picpic"
+                 placeholder="Url de votre photo de Profil">
           <button class="btn btn-outline-secondary" @click="editpic">OK</button>
         </div>
       </div>
@@ -43,23 +44,26 @@
         <textarea v-model="user.metier" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-outline-primary col w-25" data-toggle="modal" data-target="#exampleModal">Inscription</button>
+        <button type="submit" class="btn btn-outline-primary col w-25" data-toggle="modal" data-target="#exampleModal">
+          Inscription
+        </button>
         <br>
         <router-link to="/SignIn" id="lien">Déjà inscrit ? Connectez-vous ici</router-link>
       </div>
     </form>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel" >Inscription de l'utilisateur</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Inscription de l'utilisateur</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            {{message}}
+            {{ message }}
           </div>
           <div class="modal-footer">
             <div v-if="inscription">
@@ -78,51 +82,55 @@
 
 <script>
 module.exports = {
-  data(){
-    return{
+  data() {
+    return {
       user: {
         name: '',
         metier: '',
         email: '',
         password: '',
-        pic:'https://thumbs.dreamstime.com/b/ligne-mince-ic-ne-de-chef-96296803.jpg'
+        pic: 'https://thumbs.dreamstime.com/b/ligne-mince-ic-ne-de-chef-96296803.jpg'
       },
-      message : 'Mauvais remplissage de champs',
-      inscription : false
+      message: 'Mauvais remplissage de champs',
+      inscription: false
     }
   },
-  methods:{
-    async createUser(){
+  methods: {
+    async createUser() {
       let mes = await axios.post('/api/SignUp', this.user);
       this.inscription = mes.data.success
       this.message = mes.data.message
       console.log(mes)
     },
-    editpic(){
-      if (document.getElementById('picpic').value !== ''){
+    editpic() {
+      if (document.getElementById('picpic').value !== '') {
         this.user.pic = document.getElementById('picpic').value
       }
     }
-  }}
+  }
+}
 </script>
 
 <style>
-#po{
+#po {
   margin-left: auto;
   margin-right: auto;
   padding: 2em;
   border-radius: 5px;
   box-shadow: 1px 1px 12px black;
 }
-#pp{
+
+#pp {
   color: white;
   mix-blend-mode: difference;
 }
-#coco{
+
+#coco {
   margin-left: auto;
   margin-right: auto;
 }
-.btn-outline-primary{
+
+.btn-outline-primary {
   background-color: #424874;
   color: white;
   border: solid 1px #424874;

@@ -9,13 +9,13 @@ const RecetteDis = window.httpVueLoader('./Components/Recette_display.vue')
 
 const routes = [
     {path: '/', component: Acceuil},
-    {path: '/acc', component:Acceuil},
-    {path: '/recette-create/:rid', component:Creation},
-    {path: '/all-recettes', component:recettes},
-    {path: '/profile', component:Home},
-    {path: '/recette-update', component:Creation},
-    {path: '/SignUp', component:Inscription},
-    {path: '/SignIn', component:Connexion},
+    {path: '/acc', component: Acceuil},
+    {path: '/recette-create/:rid', component: Creation},
+    {path: '/all-recettes', component: recettes},
+    {path: '/profile', component: Home},
+    {path: '/recette-update', component: Creation},
+    {path: '/SignUp', component: Inscription},
+    {path: '/SignIn', component: Connexion},
     {path: '/register', component: Register},
     {path: '/display/:rid', component: RecetteDis}
 ]
@@ -27,6 +27,5 @@ const router = new VueRouter({
 var app = new Vue({
     router,
     el: '#app',
-    methods: {
-    }
+    methods: {}
 })

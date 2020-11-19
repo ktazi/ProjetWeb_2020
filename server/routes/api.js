@@ -396,41 +396,39 @@ router.post('/com', async (req, res) => {
     res.json({message: "commentaire posté", com: result.rows})
 })
 
-router.get('/numberRecette', async(req, res)=>{
+router.get('/numberRecette', async (req, res) => {
     let recette = await client.query("SELECT count(*) FROM recette");
     res.json(parseInt(recette.rows[0].count))
 })
 
 
-
-router.post('/alpha', async(req,res)=>{
-    let input = {offset : req.body.offs}
+router.post('/alpha', async (req, res) => {
+    let input = {offset: req.body.offs}
     let resu = await client.query({
-        text : 'select * from recette order by title asc limit 5 offset $1 * 5',
-        values : [input.offset]
+        text: 'select * from recette order by title asc limit 5 offset $1 * 5',
+        values: [input.offset]
     })
     res.json(resu.rows)
 })
 
 
-router.post('/best', async(req,res)=>{
-    let input = {offset : req.body.offs}
+router.post('/best', async (req, res) => {
+    let input = {offset: req.body.offs}
     let resu = await client.query({
-        text : 'select * from recette order by note desc limit 5 offset $1 * 5',
-        values : [input.offset]
+        text: 'select * from recette order by note desc limit 5 offset $1 * 5',
+        values: [input.offset]
     })
     res.json(resu.rows)
 })
 
 
-
-router.post('/comments', async(req, res) => {
+router.post('/comments', async (req, res) => {
     let input = {
-        rid : req.body.rid
+        rid: req.body.rid
     }
     let resu = await client.query({
-        text : 'select * from coms where rid=$1',
-        values : [input.rid]
+        text: 'select * from coms where rid=$1',
+        values: [input.rid]
     })
     res.json(resu.rows)
 })

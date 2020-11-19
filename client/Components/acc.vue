@@ -56,6 +56,7 @@
           <div class="pl-0-5">
             <h2 class="display-3">Fait pour vous</h2><br>
             <div class=" lead">
+            <p>
             Il y a des vérités dont on se serait bien passé, mais la vie d’étudiant.e n’est pas simple ! Alors si tu te reconnais dans les vérités suivantes c’est que KITCH' est fait pour toi !
             <br><br>
             Toi l’étudiant tu manges 5 fruits et légumes frais… par mois<br>
@@ -106,6 +107,7 @@
         </div>
       </div>
     </div>
+    </div>
   </section>
   <div class="container">
     <section class="section-padding text-center" id="pres">
@@ -118,7 +120,7 @@
             <img src="https://media-exp1.licdn.com/dms/image/C4E03AQGxCtDSmqBXiA/profile-displayphoto-shrink_400_400/0?e=1610582400&v=beta&t=z6VndwCZiQeVFxMdoGzQl6Q53VqHH1lFh2Ay5vOrpxs" class="card-img-top" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title mb-0">Kenza Tazi</h5>
-              <div class="card-text text-black-50">Programmeuse en herbe</div>
+              <div class="card-text text-black-50">404 description not found SIGABORT MISSION</div>
             </div>
           </div>
         </div>
@@ -128,7 +130,7 @@
             <img src="https://media-exp1.licdn.com/dms/image/C4D03AQG-_BvxIxERIw/profile-displayphoto-shrink_400_400/0?e=1610582400&v=beta&t=DQN5L8eXxg2J-onDPh5OI7kWHozwrpPH7rIXXm0oUcg" class="card-img-top" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title mb-0">Moise Iloo </h5>
-              <div class="card-text text-black-50">Une petite description?</div>
+              <div class="card-text text-black-50">Moise le magnifique compilateur</div>
             </div>
           </div>
         </div>
