@@ -51,7 +51,12 @@
         </div>
       </div>
     </div>
-    <div>
+    <div v-if="com.length === 0" class="text-center">
+      <p>
+        Pas de commentaires pour l'instant
+      </p>
+    </div>
+    <div v-else>
       <h5 class="text-center">Commentaires</h5>
       <ul v-for="comment in com" class="pl-0">
         <li class="list-group-item w-75 mr-auto ml-auto">

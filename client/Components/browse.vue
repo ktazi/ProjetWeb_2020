@@ -38,7 +38,7 @@
           </div>
           <div class="flex-column">
             <stars :note="recette.note"></stars>
-            <router-link :to="{ path : '/display/'+ recette.rid }" tag="button" class="btn btn-outline-secondary">Editer</router-link>
+            <router-link :to="{ path : '/display/'+ recette.rid }" tag="button" class="btn btn-outline-secondary">Consulter</router-link>
             <button class="btn btn-outline-secondary" @click="attributeRid(recette.rid)" data-toggle="modal" data-target="#exampleModal">Noter</button>
           </div>
         </li>

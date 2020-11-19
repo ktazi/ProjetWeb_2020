@@ -63,7 +63,7 @@
       <div class="row align-items-center">
         <div class="col-lg-6">
           <div class="p-5">
-            <img class="img-fluid rounded-circle"  id = "image" src="https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
+            <img class="img-fluid rounded-circle"  id = "image1" src="https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
           </div>
         </div>
         <div class="col-lg-6">
@@ -78,7 +78,7 @@
       <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2">
           <div class="p-5">
-            <img class="img-fluid img-rounded" id="image" src ="https://images.unsplash.com/photo-1514517220017-8ce97a34a7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
+            <img class="img-fluid img-rounded" id="image2" src ="https://images.unsplash.com/photo-1514517220017-8ce97a34a7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
           </div>
         </div>
         <div class="col-lg-6 order-lg-1">
@@ -153,7 +153,14 @@
   border-top: 1px solid rgba(114, 71, 158, 0.5);
   padding-top: 5em;
   }
-  #image{
+  #image1{
+    display: block;
+    width: 500px;
+    height: 500px;
+    margin: 25px auto;
+    border-radius: 50%;
+  }
+  #image2{
     display: block;
     width: 500px;
     height: 500px;
