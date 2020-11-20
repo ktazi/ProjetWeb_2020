@@ -51,7 +51,6 @@
         <router-link to="/SignIn" id="lien">Déjà inscrit ? Connectez-vous ici</router-link>
       </div>
     </form>
-
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -100,7 +99,6 @@ module.exports = {
       let mes = await axios.post('/api/SignUp', this.user);
       this.inscription = mes.data.success
       this.message = mes.data.message
-      console.log(mes)
     },
     editpic() {
       if (document.getElementById('picpic').value !== '') {

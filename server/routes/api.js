@@ -361,7 +361,7 @@ router.post('/review', async (req, res) => {
         values: [input.rid]
     })
     await client.query({
-        text: "update recette set note = (note + $1)/nb_not where rid=$2",
+        text: "update recette set note = ((note * (nb_not-1)) + $1)/nb_not where rid=$2",
         values: [input.note, input.rid]
     })
     res.json({message: "Note attribuee avec succès", success: true})
