@@ -1,4 +1,4 @@
-# Projet web avancé
+# Projet web Efrei 2020
 
 ### Installation :
 
